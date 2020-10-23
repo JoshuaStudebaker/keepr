@@ -16,6 +16,7 @@ namespace Keepr.Models
   }
 
   // REVIEW Come back, likely, and make the VaultKeepViewModel
+  // plus the creator not in the database, but here in the model, add that on everytime
 
 
 }
