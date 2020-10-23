@@ -1,4 +1,5 @@
 using System.Data;
+using Dapper;
 using Keepr.Models;
 
 namespace Keepr.Repositories
@@ -12,15 +13,16 @@ namespace Keepr.Repositories
       _db = db;
     }
 
-    internal int Create(Keep keep)
+    internal int Create(Keep newKeep)
     {
       string sql = @"
 INSERT INTO keeps
 (creatorId, name, description, img)
 VALUES
-(@CreatorId, @Name, @Description, @Img)
+(@CreatorId, @Name, @Description, @Img);
+SELECT LAST_INSERT_ID();
 ";
-      return
+      return _db.ExecuteScalar<int>(sql, newKeep);
     }
   }
 }
