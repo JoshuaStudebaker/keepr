@@ -65,7 +65,8 @@
 -- VALUES
 -- ("8700cd9b-3848-4114-9936-c047349efa80", "Second Vault")
 
-SELECT * FROM vaults
+-- SELECT * FROM vaults
+-- SELECT * FROM profiles
 
 
 

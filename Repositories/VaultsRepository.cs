@@ -52,8 +52,6 @@ SELECT LAST_INSERT_ID();
 
     }
 
-    // REVIEW THANK ABOUT HOW TO DO EDIT
-
     internal IEnumerable<Vault> GetByCreatorId(string creatorId)
     {
       string sql = creatorSql + "WHERE creatorId = @creatorId;";
