@@ -7,11 +7,9 @@
         <h6 class="card-subtitle text-muted"><router-link :to="{name: 'Profile', params: {profileId: vaultProp.creatorId}}"><i class="far fa-user profile"></i></router-link> {{ vaultProp.creator.name }}</h6>
       </div>
       <div class="card-body">
-        <img :src="vaultProp.img" class="img-fluid" alt="Responsive image">
+        <p class="card-text">{{ vaultProp.description }}</p> 
       </div>
-      <div class="card-footer see-through-white py-1">
-        <p class="card-text">{{ vaultProp.description }}</p>        
-      </div>
+      
     </div>
   </div>
 </template>

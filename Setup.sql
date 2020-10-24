@@ -60,6 +60,11 @@
 -- VALUES
 -- ("8700cd9b-3848-4114-9936-c047349efa80", "First Ever Vault", "Love MySql", 1)
 
+INSERT INTO vaultkeeps
+(creatorId, vaultId, kidId)
+VALUES
+("8700cd9b-3848-4114-9936-c047349efa80", 1, 1)
+
 -- INSERT INTO vaults
 -- (creatorId, name)
 -- VALUES
@@ -68,5 +73,21 @@
 -- SELECT * FROM vaults
 -- SELECT * FROM profiles
 
+-- CREATE TABLE vaultkeeps
+-- (
+--   id INT AUTO_INCREMENT,
+--   creatorId VARCHAR(255) NOT NULL,
+--   vaultId INT,
+--   keepId INT,
 
+--   PRIMARY KEY (id),
+
+--   FOREIGN KEY (vaultId) 
+--     REFERENCES vaults (id) 
+--     ON DELETE CASCADE,
+
+--   FOREIGN KEY (keepId) 
+--     REFERENCES keeps (id)
+--     ON DELETE CASCADE
+-- );
 
