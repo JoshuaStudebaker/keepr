@@ -8,7 +8,8 @@ export default new Vuex.Store({
   state: {
     profile: {},
     allKeeps: [],
-    activeKeep: {}
+    activeKeep: {},
+    modalToggle: false
   },
   mutations: {
     setProfile(state, profile) {
@@ -19,6 +20,10 @@ export default new Vuex.Store({
     },
     setActiveKeep(state, activeKeep) {
       state.activeKeep = activeKeep
+      state.modalToggle = true
+    },
+    returnAllKeeps(state) {
+      state.modalToggle = false
     }
   },
   actions: {

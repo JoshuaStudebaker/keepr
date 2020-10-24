@@ -20,17 +20,14 @@ export default {
   name: "all-keeps-component",
   props: ["keepProp"],
   components: {},
-  data() {    
-  },
+  
   mounted() {},
 
   computed: {},
   methods: {
    
-    setActiveKeep() {
-      console.log("setActive", this.keepProp.id)      
-      this.$store.dispatch("getActiveKeep", this.keepProp.id);
-      
+    setActiveKeep() {           
+      this.$store.dispatch("getActiveKeep", this.keepProp.id);      
     },
   
   },
