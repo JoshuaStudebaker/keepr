@@ -20,6 +20,8 @@ namespace Keepr.Repositories
     FROM keeps keep 
     JOIN profiles profile on keep.creatorId = profile.id ";
 
+    // This is sending back the Id, because of the 'Select Last_Insert_ID()
+    // The other way to do this is to set newKeep.Id this created Id here, but instead this is done in the service (I believe this is being done right)
     internal int Create(Keep newKeep)
     {
       string sql = @"
@@ -53,10 +55,12 @@ SELECT LAST_INSERT_ID();
 
     // REVIEW THANK ABOUT HOW TO DO EDIT
 
-    internal IEnumerable<Keep> GetByCreatorId(string profileId)
+    internal IEnumerable<Keep> GetByCreatorId(string creatorId)
     {
-      string sql = creatorSql + "WHERE creatorId = @profileId;";
-      return _db.Query<Keep, Profile, Keep>(sql, (keep, profile) => { keep.Creator = profile; return keep; }, new { profileId }, splitOn: "id");
+      string sql = creatorSql + "WHERE creatorId = @creatorId;";
+      return _db.Query<Keep, Profile, Keep>(sql, (keep, profile) =>
+      { keep.Creator = profile; return keep; },
+      new { creatorId }, splitOn: "id");
     }
     internal void Delete(int id)
     {
