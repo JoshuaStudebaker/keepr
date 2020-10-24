@@ -9,7 +9,9 @@ export default new Vuex.Store({
     profile: {},
     allKeeps: [],
     activeKeep: {},
-    modalToggle: false
+    modalToggle: false,
+    creatorKeeps: [],
+    creatorVaults: []
   },
   mutations: {
     setProfile(state, profile) {
@@ -44,6 +46,29 @@ export default new Vuex.Store({
       } catch (error) {
         console.error("cannot get keeps - sorry");
       }
+    },
+     
+    async getCreatorKeeps({ commit }) {
+       console.log("creatorKeeps")
+      // try {
+      //   console.log("get all keeps?");       
+      //   let res = await api.get("keeps");
+      //   console.log("get keeps", res);
+      //   commit("setAllKeeps", res.data);
+      // } catch (error) {
+      //   console.error("cannot get keeps - sorry");
+      // }
+    },
+    async getCreatorVaults({ commit }) {
+       console.log("creatorVaults")
+      // try {
+      //   console.log("get all keeps?");       
+      //   let res = await api.get("keeps");
+      //   console.log("get keeps", res);
+      //   commit("setAllKeeps", res.data);
+      // } catch (error) {
+      //   console.error("cannot get keeps - sorry");
+      // }
     },
 
 // async getCreator({ commit }, creatorId) {

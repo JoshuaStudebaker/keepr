@@ -14,9 +14,13 @@ namespace Keepr.Controllers
   public class ProfilesController : ControllerBase
   {
     private readonly ProfilesService _ps;
-    public ProfilesController(ProfilesService ps)
+
+    private readonly KeepsService _keepsService;
+
+    public ProfilesController(ProfilesService ps, KeepsService ks)
     {
       _ps = ps;
+      _keepsService = ks;
     }
 
 
@@ -34,5 +38,20 @@ namespace Keepr.Controllers
         return BadRequest(e.Message);
       }
     }
+    [HttpGet("{id}/keeps")]
+    [Authorize]
+    public ActionResult<Profile> GetByCreatorId(string id)
+    {
+      try
+      {
+
+        return Ok(_keepsService.GetByCreatorId(id));
+      }
+      catch (Exception e)
+      {
+        return BadRequest(e.Message);
+      }
+    }
+
   }
 }
