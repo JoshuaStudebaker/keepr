@@ -29,6 +29,8 @@ export default new Vuex.Store({
     },
     setProfileKeeps(state, profileKeeps) {
       state.creatorKeeps = profileKeeps
+    }, setProfileVaults(state, profileVaults) {
+      state.creatorVaults = profileVaults
     }
   },
   actions: {
@@ -62,22 +64,23 @@ export default new Vuex.Store({
         console.error("cannot get profile keeps - sorry");
       }
     },
-    async getCreatorVaults({ commit }) {
-       console.log("creatorVaults")
-      // try {
-      //   console.log("get all keeps?");       
-      //   let res = await api.get("keeps");
-      //   console.log("get keeps", res);
-      //   commit("setAllKeeps", res.data);
-      // } catch (error) {
-      //   console.error("cannot get keeps - sorry");
-      // }
+    async getProfileVaults({ commit }, creatorId) {
+       
+      try {
+        console.log("get creator vaults?", creatorId);       
+        let res = await api.get("profiles/" + creatorId +"/vaults");
+        console.log("get profile vaults", res);
+        commit("setProfileVaults", res.data);
+      } catch (error) {
+        console.error("cannot get profile vaults - sorry");
+      }
     },
 
    
 
     getCreator({ dispatch }, creatorId) {
-  console.log("getcreator", creatorId)
+      console.log("getcreator", creatorId)
+      dispatch("getProfileVaults", creatorId)
       dispatch("getProfileKeeps", creatorId)
     },
 

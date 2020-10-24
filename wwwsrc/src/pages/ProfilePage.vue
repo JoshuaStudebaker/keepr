@@ -1,5 +1,6 @@
 <template>
   <div>
+     <profile-vaults-component v-for="iVault in creatorVaults" :key="iVault.id" :vaultProp="iVault"/>
      <profile-keeps-component v-for="iKeep in creatorKeeps" :key="iKeep.id" :keepProp="iKeep"/>
   </div>
 </template>
@@ -8,10 +9,12 @@
 
 
   import profileKeepsComponent from "../components/ProfileKeepsComponent";
+  import profileVaultsComponent from "../components/ProfileVaultsComponent";
 export default {
   name: "profile-page",
   components: {
-    profileKeepsComponent
+    profileKeepsComponent,
+    profileVaultsComponent
   },
   mounted() {
     this.$store.dispatch("getProfile");
