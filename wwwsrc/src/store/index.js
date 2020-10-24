@@ -7,7 +7,8 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     profile: {},
-    allKeeps: []
+    allKeeps: [],
+    activeKeep: {}
   },
   mutations: {
     setProfile(state, profile) {
@@ -15,6 +16,9 @@ export default new Vuex.Store({
     },
     setAllKeeps(state, allKeeps) {
       state.allKeeps = allKeeps
+    },
+    setActiveKeep(state, activeKeep) {
+      state.activeKeep = activeKeep
     }
   },
   actions: {
@@ -37,5 +41,16 @@ export default new Vuex.Store({
       }
     },
 
+
+      async getActiveKeep({ commit }, keepId) {
+      try {
+        console.log("get active keep?");       
+        let res = await api.get("keeps/" + keepId);
+        console.log("active keep", res);
+        commit("setActiveKeep", res.data);
+      } catch (error) {
+        console.error("cannot get keep - sorry");
+      }
+    },
   },
 });
