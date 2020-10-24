@@ -42,6 +42,30 @@
 -- VALUES
 -- ("8700cd9b-3848-4114-9936-c047349efa80", "Third Ever Keep" )
 
+-- CREATE TABLE vaults(
+--   id int AUTO_INCREMENT,
+--   creatorId VARCHAR(255) NOT NULL,
+--   name VARCHAR(255) NOT NULL,
+--   description VARCHAR(255) DEFAULT "No description available",
+--   isPrivate TINYINT DEFAULT 1,  
+  
+--   PRIMARY KEY (id),
+--   FOREIGN KEY (creatorId)
+--     REFERENCES profiles(id)
+--     ON DELETE CASCADE
+-- )
+
+-- INSERT INTO vaults
+-- (creatorId, name, description, isPrivate)
+-- VALUES
+-- ("8700cd9b-3848-4114-9936-c047349efa80", "First Ever Vault", "Love MySql", 1)
+
+-- INSERT INTO vaults
+-- (creatorId, name)
+-- VALUES
+-- ("8700cd9b-3848-4114-9936-c047349efa80", "Second Vault")
+
+SELECT * FROM vaults
 
 
 
