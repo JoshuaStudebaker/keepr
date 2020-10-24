@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using CodeWorks.Auth0Provider;
 using Keepr.Models;
 using Keepr.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Keepr.Controllers
@@ -32,5 +33,52 @@ namespace Keepr.Controllers
         return BadRequest(error.Message);
       }
     }
+
+    [HttpGet("{id}")]
+    public ActionResult<IEnumerable<Keep>> GetById(int id)
+    {
+      try
+      {
+        return Ok(_service.GetById(id));
+      }
+      catch (Exception error)
+      {
+        return BadRequest(error.Message);
+      }
+    }
+
+    [HttpPost]
+    [Authorize]
+    public async Task<ActionResult<Keep>> Create([FromBody] Keep newKeepBody)
+    {
+      try
+      {
+        Profile userInfo = await HttpContext.GetUserInfoAsync<Profile>();
+        newKeepBody.CreatorId = userInfo.Id;
+        Keep newKeep = _service.Create(newKeepBody);
+        newKeep.Creator = userInfo;
+        return Ok(newKeep);
+      }
+      catch (System.Exception error)
+      {
+        return BadRequest(error.Message);
+      }
+    }
+    [HttpDelete("{id}")]
+    [Authorize]
+    public async Task<ActionResult<string>> Delete(int id)
+    {
+      try
+      {
+        Profile userInfo = await HttpContext.GetUserInfoAsync<Profile>();
+        return Ok(_service.Delete(id, userInfo.Id));
+      }
+      catch (System.Exception error)
+      {
+        return BadRequest(error.Message);
+
+      }
+    }
+
   }
 }

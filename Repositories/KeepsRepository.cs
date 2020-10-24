@@ -64,7 +64,7 @@ SELECT LAST_INSERT_ID();
     }
     internal void Delete(int id)
     {
-      string sql = "DELETE FROM blogs WHERE id = @id";
+      string sql = "DELETE FROM keeps WHERE id = @id";
       _db.Execute(sql, new { id });
     }
   }
