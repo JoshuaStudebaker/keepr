@@ -39,7 +39,7 @@ namespace Keepr.Controllers
       }
     }
     [HttpGet("{id}/keeps")]
-    [Authorize]
+
     public ActionResult<Profile> GetByCreatorId(string id)
     {
       try

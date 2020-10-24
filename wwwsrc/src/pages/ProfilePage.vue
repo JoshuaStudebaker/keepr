@@ -1,19 +1,21 @@
 <template>
   <div>
-    
+     <profile-keeps-component v-for="iKeep in creatorKeeps" :key="iKeep.id" :keepProp="iKeep"/>
   </div>
 </template>
 
 <script>
 
 
+  import profileKeepsComponent from "../components/ProfileKeepsComponent";
 export default {
   name: "profile-page",
   components: {
-    
+    profileKeepsComponent
   },
   mounted() {
     this.$store.dispatch("getProfile");
+    this.$store.dispatch("getCreator", this.$route.params.profileId);
     
   },
   computed: {

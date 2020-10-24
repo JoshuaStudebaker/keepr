@@ -18,7 +18,7 @@
 
 <script>
 export default {
-  name: "all-keeps-component",
+  name: "profiles-keeps-component",
   props: ["keepProp"],
   components: {},
   

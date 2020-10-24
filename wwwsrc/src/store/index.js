@@ -26,6 +26,9 @@ export default new Vuex.Store({
     },
     returnAllKeeps(state) {
       state.modalToggle = false
+    },
+    setProfileKeeps(state, profileKeeps) {
+      state.creatorKeeps = profileKeeps
     }
   },
   actions: {
@@ -48,16 +51,16 @@ export default new Vuex.Store({
       }
     },
      
-    async getCreatorKeeps({ commit }) {
-       console.log("creatorKeeps")
-      // try {
-      //   console.log("get all keeps?");       
-      //   let res = await api.get("keeps");
-      //   console.log("get keeps", res);
-      //   commit("setAllKeeps", res.data);
-      // } catch (error) {
-      //   console.error("cannot get keeps - sorry");
-      // }
+    async getProfileKeeps({ commit }, creatorId) {
+       
+      try {
+        console.log("get creator keeps?", creatorId);       
+        let res = await api.get("profiles/" + creatorId +"/keeps");
+        console.log("get profile keeps", res);
+        commit("setProfileKeeps", res.data);
+      } catch (error) {
+        console.error("cannot get profile keeps - sorry");
+      }
     },
     async getCreatorVaults({ commit }) {
        console.log("creatorVaults")
@@ -73,9 +76,9 @@ export default new Vuex.Store({
 
    
 
-    getCreator({ commit }, creatorId) {
-  
-      //  this.$router.push({name: "Profile", params: { profileId: creatorid}})
+    getCreator({ dispatch }, creatorId) {
+  console.log("getcreator", creatorId)
+      dispatch("getProfileKeeps", creatorId)
     },
 
 //       async getActiveKeep({ commit }, keepId) {
