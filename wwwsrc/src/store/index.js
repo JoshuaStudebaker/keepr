@@ -46,6 +46,16 @@ export default new Vuex.Store({
       }
     },
 
+// async getCreator({ commit }, creatorId) {
+//       try {
+//         console.log("get creator");       
+//         let res = await api.get("profiles/" + creatorId);
+//         console.log("get creator", res);
+//         commit("setAllKeeps", res.data);
+//       } catch (error) {
+//         console.error("cannot get keeps - sorry");
+//       }
+//     },
 
       async getActiveKeep({ commit }, keepId) {
       try {
