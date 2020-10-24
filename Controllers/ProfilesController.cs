@@ -13,14 +13,17 @@ namespace Keepr.Controllers
   [Route("api/[controller]")]
   public class ProfilesController : ControllerBase
   {
-    private readonly ProfilesService _ps;
+    private readonly ProfilesService _profilesService;
 
     private readonly KeepsService _keepsService;
 
-    public ProfilesController(ProfilesService ps, KeepsService ks)
+    private readonly VaultsService _vaultsService;
+
+    public ProfilesController(ProfilesService ps, KeepsService ks, VaultsService vs)
     {
-      _ps = ps;
+      _profilesService = ps;
       _keepsService = ks;
+      _vaultsService = vs;
     }
 
 
@@ -31,7 +34,7 @@ namespace Keepr.Controllers
       try
       {
         Profile userInfo = await HttpContext.GetUserInfoAsync<Profile>();
-        return Ok(_ps.GetOrCreateProfile(userInfo));
+        return Ok(_profilesService.GetOrCreateProfile(userInfo));
       }
       catch (Exception e)
       {
@@ -39,8 +42,7 @@ namespace Keepr.Controllers
       }
     }
     [HttpGet("{id}/keeps")]
-
-    public ActionResult<Profile> GetByCreatorId(string id)
+    public ActionResult<Profile> GetKeepsByCreatorId(string id)
     {
       try
       {
@@ -52,6 +54,20 @@ namespace Keepr.Controllers
         return BadRequest(e.Message);
       }
     }
+    [HttpGet("{id}/vaults")]
+    public ActionResult<Profile> GetVaultsByCreatorId(string id)
+    {
+      try
+      {
+
+        return Ok(_vaultsService.GetByCreatorId(id));
+      }
+      catch (Exception e)
+      {
+        return BadRequest(e.Message);
+      }
+    }
+
 
   }
 }
