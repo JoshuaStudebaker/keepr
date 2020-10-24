@@ -22,16 +22,41 @@ namespace Keepr.Repositories
 
     // This is sending back the Id, because of the 'Select Last_Insert_ID()
     // The other way to do this is to set newKeep.Id this created Id here, but instead this is done in the service (I believe this is being done right)
+    // REVIEW For some reason, this is not working for the image and descriptions in making them to their default
     internal int Create(Keep newKeep)
     {
-      string sql = @"
+      if (newKeep.Img != null && newKeep.Description != null)
+      {
+        string sql = @"
 INSERT INTO keeps
 (creatorId, name, description, img)
 VALUES
 (@CreatorId, @Name, @Description, @Img);
 SELECT LAST_INSERT_ID();
+"; return _db.ExecuteScalar<int>(sql, newKeep);
+      }
+      else if (newKeep.Description != null)
+      {
+        string sql = @"
+INSERT INTO keeps
+(creatorId, name, description)
+VALUES
+(@CreatorId, @Name, @Description);
+SELECT LAST_INSERT_ID();
+"; return _db.ExecuteScalar<int>(sql, newKeep);
+      }
+      else
+      {
+        string sql = @"
+INSERT INTO keeps
+(creatorId, name, img)
+VALUES
+(@CreatorId, @Name, @Img);
+SELECT LAST_INSERT_ID();
 ";
-      return _db.ExecuteScalar<int>(sql, newKeep);
+        return _db.ExecuteScalar<int>(sql, newKeep);
+      }
+
     }
 
     internal IEnumerable<Keep> GetAll()
