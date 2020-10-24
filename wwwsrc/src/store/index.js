@@ -71,26 +71,22 @@ export default new Vuex.Store({
       // }
     },
 
-// async getCreator({ commit }, creatorId) {
+   
+
+    getCreator({ commit }, creatorId) {
+  
+      //  this.$router.push({name: "Profile", params: { profileId: creatorid}})
+    },
+
+//       async getActiveKeep({ commit }, keepId) {
 //       try {
-//         console.log("get creator");       
-//         let res = await api.get("profiles/" + creatorId);
-//         console.log("get creator", res);
-//         commit("setAllKeeps", res.data);
+//         console.log("get active keep?");       
+//         let res = await api.get("keeps/" + keepId);
+//         console.log("active keep", res);
+//         commit("setActiveKeep", res.data);
 //       } catch (error) {
-//         console.error("cannot get keeps - sorry");
+//         console.error("cannot get keep - sorry");
 //       }
 //     },
-
-      async getActiveKeep({ commit }, keepId) {
-      try {
-        console.log("get active keep?");       
-        let res = await api.get("keeps/" + keepId);
-        console.log("active keep", res);
-        commit("setActiveKeep", res.data);
-      } catch (error) {
-        console.error("cannot get keep - sorry");
-      }
-    },
   },
 });

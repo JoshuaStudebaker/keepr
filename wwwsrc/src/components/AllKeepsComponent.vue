@@ -3,7 +3,7 @@
     <div class="card see-through rounded">
       <div class="card-header see-through-white">
         <h5 class="card-title active-keep-button" @click="setActiveKeep()">{{ keepProp.name }}</h5>
-        <h6 class="card-subtitle text-muted"><i class="far fa-user profile" @click="profileLink"></i> {{ keepProp.creator.name }}</h6>
+        <h6 class="card-subtitle text-muted"><i class="far fa-user profile" @click="creatorLink"></i> {{ keepProp.creator.name }}</h6>
       </div>
       <div class="card-body">
         <img :src="keepProp.img" class="img-fluid" alt="Responsive image">
@@ -30,10 +30,11 @@ export default {
       this.$store.dispatch("getActiveKeep", this.keepProp.id);      
     },
 
-    profileLink(){
+    
+    creatorLink(){
       console.log("creatorId", this.keepProp.creatorId)
-      // this.$store.dispatch("getCreator", this.keepProp.creatorId)
-    }
+     
+    },
   
   },
 };

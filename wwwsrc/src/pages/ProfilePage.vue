@@ -8,13 +8,13 @@
 
 
 export default {
-  name: "creator-page",
+  name: "profile-page",
   components: {
     
   },
   mounted() {
-    this.$store.dispatch("getCreatorKeeps");
-    this.$store.dispatch("getCreatorVaults")
+    this.$store.dispatch("getProfile");
+    
   },
   computed: {
     creatorKeeps() {
