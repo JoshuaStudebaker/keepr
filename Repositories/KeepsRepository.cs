@@ -80,18 +80,31 @@ SELECT LAST_INSERT_ID();
       }, new { id }, splitOn: "id").FirstOrDefault();
 
     }
-
+    // private readonly string creatorSql = @"SELECT 
+    //     keep.*,
+    //     profile.* 
+    //     FROM keeps keep 
+    //     JOIN profiles profile on keep.creatorId = profile.id ";
+    //  return _db.Query<Keep, Profile, Keep>(sql, (keep, profile) =>
+    //       {
+    //         keep.Creator = profile; return keep;
+    //       }, splitOn: "id")
     internal IEnumerable<Keep> getKeepsByVaultId(int vaultId)
     {
       string sql = @"
-      SELECT k.*,
-      vk.id as VaultKeepId
-      FROM vaultkeeps vk
-      JOIN keeps k on k.id = vk.keepId
+      SELECT keep.*,
+      profile.*,
+      vaultKeep.id as VaultKeepId
+      FROM vaultkeeps vaultKeep
+      LEFT JOIN keeps keep on keep.id = vaultKeep.keepId
+      INNER JOIN profiles profile on keep.creatorId = profile.id
       WHERE vaultId = @vaultId
       ";
 
-      return _db.Query<VaultKeepViewModel>(sql, new { vaultId });
+      return _db.Query<VaultKeepViewModel, Profile, VaultKeepViewModel>(sql, (vaultKeepViewModel, profile) =>
+      {
+        vaultKeepViewModel.Creator = profile; return vaultKeepViewModel;
+      }, new { vaultId }, splitOn: "id");
     }
 
     // REVIEW THANK ABOUT HOW TO DO EDIT
