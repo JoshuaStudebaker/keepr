@@ -32,13 +32,13 @@
             />
           </div>
           <button type="submit" class="btn btn-primary">Submit</button>
-          <!-- <button
+          <button
             type="button"
             class="btn btn-danger mx-2"
-            @click="formShowCancel"
+            @click="keepFormCancel"
           >
             Cancel
-          </button> -->
+          </button>
         </form>
   </div>
 </template>
@@ -73,6 +73,9 @@ createKeep() {
       // this.newKeep = { name: "", description: "", img: ""};
       // this.formShow = false;
     },
+    keepFormCancel(){
+       this.$store.commit("keepFormToggle")
+    }
   },
 };
 </script>

@@ -1,9 +1,11 @@
 <template>
   <div>
+     <button v-if="!keepForm" type="button" class="btn btn-secondary" @click="keepFormToggle">Add Keep</button>
+     <button v-if="!vaultForm" type="button" class="btn btn-warning" @click="vaultFormToggle">Add Vault</button>
+     <keeps-form-component v-if="keepForm"/>
+     <vaults-form-component v-if="vaultForm"/>
      <profile-vaults-component v-for="iVault in creatorVaults" :key="iVault.id" :vaultProp="iVault"/>
      <profile-keeps-component v-for="iKeep in creatorKeeps" :key="iKeep.id" :keepProp="iKeep"/>
-     <keeps-form-component v-if="keepForm"/>
-     <button v-if="!keepForm" type="button" class="btn btn-secondary" @click="keepFormToggle">Add Keep</button>
   </div>
 </template>
 
@@ -12,13 +14,16 @@
 
   import profileKeepsComponent from "../components/ProfileKeepsComponent";
   import profileVaultsComponent from "../components/ProfileVaultsComponent";
-  import keepsFormComponent from "../components/KeepsFormComponent"
+  import keepsFormComponent from "../components/KeepsFormComponent";
+  import vaultsFormComponent from "../components/VaultsFormComponent"
+
 export default {
   name: "profile-page",
   components: {
     profileKeepsComponent,
     profileVaultsComponent,
-    keepsFormComponent
+    keepsFormComponent,
+    vaultsFormComponent
   },
   mounted() {
     this.$store.dispatch("getProfile");
@@ -41,6 +46,9 @@ export default {
     },
     keepForm(){
       return this.$store.state.keepForm
+    },
+    vaultForm(){
+      return this.$store.state.vaultForm
     }
     
   },methods: {
@@ -48,9 +56,15 @@ export default {
     returnAllKeeps() {           
       this.$store.commit("returnAllKeeps");      
     },
+
     keepFormToggle(){
-  this.$store.commit("keepFormToggle")}
+      this.$store.commit("keepFormToggle")
   },
+  vaultFormToggle(){
+      this.$store.commit("vaultFormToggle")
+      }
+  },
+  
 };
 </script>
 <style>

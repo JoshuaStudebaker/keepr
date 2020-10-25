@@ -14,7 +14,8 @@ export default new Vuex.Store({
     creatorKeeps: [],
     creatorVaults: [],
     vaultKeeps: [],
-    keepForm: false
+    keepForm: false,
+    vaultForm: false
   },
   mutations: {
     setProfile(state, profile) {
@@ -45,6 +46,12 @@ export default new Vuex.Store({
      deleteKeep(state, keepId) {
       state.creatorKeeps = state.creatorKeeps.filter((k) => k.id != keepId);
     },
+     vaultFormToggle(state) {
+      state.vaultForm = !state.vaultForm
+    },
+     deleteVault(state, vaultId) {
+      state.creatorVaults = state.creatorVaults.filter((v) => v.id != vaultId);
+    }
   },
   actions: {
     async getProfile({ commit }) {
@@ -134,6 +141,25 @@ export default new Vuex.Store({
       ) {
         await api.delete("keeps/" + keepId);
         commit("deleteKeep", keepId);
+      }
+    },
+    async createVault({ commit, state }, newVault) {
+          newVault.isPrivate = parseInt(newVault.isPrivate)
+      console.log("createVault", newVault);
+      let res = await api.post("vaults/", newVault);
+      console.log("createVault - res", res);
+      commit("setProfileVaults", [...state.creatorVaults, res.data]);
+      
+    },
+
+        async deleteVault({ commit }, vaultId) {
+      if (
+        await SweetAlert.sweetDelete(
+         
+        )
+      ) {
+        await api.delete("vaults/" + vaultId);
+        commit("deleteVault", vaultId);
       }
     },
   },
