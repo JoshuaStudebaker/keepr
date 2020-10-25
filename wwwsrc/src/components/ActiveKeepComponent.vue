@@ -4,6 +4,7 @@
       <div class="card-header see-through-white">
         <h5 class="card-title">{{ activeKeep.name }}</h5>
         <h6 class="card-subtitle text-muted">By: {{ activeKeep.creator.name }}</h6>
+        <p class="active-keep-button" @click="returnAllKeeps"><i class="far fa-times-circle text-danger"></i>
       </div>
       <div class="card-body">
         <img :src="activeKeep.img" class="img-fluid" alt="Responsive image">
@@ -28,7 +29,10 @@ export default {
     },
   },
   methods: {
-    
+       returnAllKeeps() {           
+      this.$store.commit("returnAllKeeps");     
+    },
+  
   },
 };
 </script>

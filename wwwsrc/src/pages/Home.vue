@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <h1 class="active-keep-button" @click="returnAllKeeps">Welcome</h1>
+    <h1 >Welcome</h1>
     <div class="row" v-if="modalToggle != true">
       <all-keeps-component v-for="iKeep in keeps" :key="iKeep.id" :keepProp="iKeep"/>
     </div>
@@ -34,12 +34,6 @@ export default {
       return this.$store.state.modalToggle
     }
     
-  },methods: {
-   
-    returnAllKeeps() {           
-      this.$store.commit("returnAllKeeps");      
-    },
-  
   },
 };
 </script>

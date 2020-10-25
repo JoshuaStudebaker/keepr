@@ -107,7 +107,7 @@ SELECT LAST_INSERT_ID();
       }, new { vaultId }, splitOn: "id");
     }
 
-    // REVIEW THANK ABOUT HOW TO DO EDIT
+    // REVIEW THINK ABOUT HOW TO DO EDIT
 
     internal IEnumerable<Keep> GetByCreatorId(string creatorId)
     {
