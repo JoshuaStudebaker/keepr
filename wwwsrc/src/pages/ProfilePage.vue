@@ -2,6 +2,8 @@
   <div>
      <profile-vaults-component v-for="iVault in creatorVaults" :key="iVault.id" :vaultProp="iVault"/>
      <profile-keeps-component v-for="iKeep in creatorKeeps" :key="iKeep.id" :keepProp="iKeep"/>
+     <keeps-form-component v-if="keepForm"/>
+     <button v-if="!keepForm" type="button" class="btn btn-secondary" @click="keepFormToggle">Add Keep</button>
   </div>
 </template>
 
@@ -10,11 +12,13 @@
 
   import profileKeepsComponent from "../components/ProfileKeepsComponent";
   import profileVaultsComponent from "../components/ProfileVaultsComponent";
+  import keepsFormComponent from "../components/KeepsFormComponent"
 export default {
   name: "profile-page",
   components: {
     profileKeepsComponent,
-    profileVaultsComponent
+    profileVaultsComponent,
+    keepsFormComponent
   },
   mounted() {
     this.$store.dispatch("getProfile");
@@ -34,6 +38,9 @@ export default {
     },
     modalToggle(){
       return this.$store.state.modalToggle
+    },
+    keepForm(){
+      return this.$store.state.keepForm
     }
     
   },methods: {
@@ -41,7 +48,8 @@ export default {
     returnAllKeeps() {           
       this.$store.commit("returnAllKeeps");      
     },
-  
+    keepFormToggle(){
+  this.$store.commit("keepFormToggle")}
   },
 };
 </script>

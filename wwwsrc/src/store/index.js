@@ -12,7 +12,8 @@ export default new Vuex.Store({
     modalToggle: false,
     creatorKeeps: [],
     creatorVaults: [],
-    vaultKeeps: []
+    vaultKeeps: [],
+    keepForm: false
   },
   mutations: {
     setProfile(state, profile) {
@@ -33,8 +34,12 @@ export default new Vuex.Store({
     },
     setProfileKeeps(state, profileKeeps) {
       state.creatorKeeps = profileKeeps
-    }, setProfileVaults(state, profileVaults) {
+    },
+    setProfileVaults(state, profileVaults) {
       state.creatorVaults = profileVaults
+    },
+    keepFormToggle(state) {
+      state.keepForm = !state.keepForm
     }
   },
   actions: {
@@ -98,15 +103,23 @@ export default new Vuex.Store({
       dispatch("getProfileKeeps", creatorId)
     },
 
-//       async getActiveKeep({ commit }, keepId) {
-//       try {
-//         console.log("get active keep?");       
-//         let res = await api.get("keeps/" + keepId);
-//         console.log("active keep", res);
-//         commit("setActiveKeep", res.data);
-//       } catch (error) {
-//         console.error("cannot get keep - sorry");
-//       }
-//     },
+      async getActiveKeep({ commit }, keepId) {
+      try {
+        console.log("get active keep?");       
+        let res = await api.get("keeps/" + keepId);
+        console.log("active keep", res);
+        commit("setActiveKeep", res.data);
+      } catch (error) {
+        console.error("cannot get keep - sorry");
+      }
+    },
+      
+       async createKeep({ commit, state }, newKeep) {
+      console.log("createKeep", newKeep);
+      let res = await api.post("keeps/", newKeep);
+      console.log("createKeep - res", res);
+      commit("setProfileKeeps", [...state.creatorKeeps, res.data]);
+      
+    },
   },
 });
