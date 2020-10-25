@@ -144,7 +144,12 @@ export default new Vuex.Store({
       }
     },
     async createVault({ commit, state }, newVault) {
-          newVault.isPrivate = parseInt(newVault.isPrivate)
+      if (newVault.isPrivate == "false") {
+        newVault.isPrivate = false
+      }
+      if (newVault.isPrivate == "true") {
+      newVault.isPrivate = true
+    }
       console.log("createVault", newVault);
       let res = await api.post("vaults/", newVault);
       console.log("createVault - res", res);

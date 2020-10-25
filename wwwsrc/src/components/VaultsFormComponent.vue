@@ -23,11 +23,11 @@
           </div>
           <div class="form-group">
             <div class="custom-control custom-radio">
-  <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input" v-model="newVault.isPrivate" value=1>
+  <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input" v-model="newVault.isPrivate" value=true>
   <label class="custom-control-label" for="customRadio1">Set to Private</label>
 </div>
 <div class="custom-control custom-radio">
-  <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input" v-model="newVault.isPrivate" value=0>
+  <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input" v-model="newVault.isPrivate" value=false>
   <label class="custom-control-label" for="customRadio2">Set to Public</label>
 </div>
           </div>
