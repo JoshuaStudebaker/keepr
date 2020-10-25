@@ -11,7 +11,8 @@ export default new Vuex.Store({
     activeKeep: {},
     modalToggle: false,
     creatorKeeps: [],
-    creatorVaults: []
+    creatorVaults: [],
+    vaultKeeps: []
   },
   mutations: {
     setProfile(state, profile) {
@@ -19,6 +20,9 @@ export default new Vuex.Store({
     },
     setAllKeeps(state, allKeeps) {
       state.allKeeps = allKeeps
+    },
+    setVaultKeeps(state, vaultKeeps) {
+      state.vaultKeeps = vaultKeeps
     },
     setActiveKeep(state, activeKeep) {
       state.activeKeep = activeKeep
@@ -76,7 +80,17 @@ export default new Vuex.Store({
       }
     },
 
-   
+   async getVaultKeeps({ commit }, vaultId) {
+       
+      try {
+        console.log("get vault keeps?", vaultId);       
+        let res = await api.get("vaults/" + vaultId +"/keeps");
+        console.log("get vault keeps", res);
+        commit("setVaultKeeps", res.data);
+      } catch (error) {
+        console.error("cannot get vault keeps - sorry");
+      }
+    },
 
     getCreator({ dispatch }, creatorId) {
       console.log("getcreator", creatorId)

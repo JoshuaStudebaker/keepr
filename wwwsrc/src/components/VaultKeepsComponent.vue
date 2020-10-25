@@ -2,22 +2,24 @@
   <div class="col-4">
     <div class="card see-through rounded">
       <div class="card-header see-through-white">
-        <router-link :to="{name: 'Vault', params: {vaultId: vaultProp.id}}"><h5 class="card-title active-keep-button" @click="setActiveVault()">{{ vaultProp.name }}</h5></router-link>
+        <h5 class="card-title active-keep-button" @click="setActiveKeep()">{{ keepProp.name }}</h5>
       <h1 class="mt-2"></h1>
-        <h6 class="card-subtitle text-muted"><i class="far fa-user profile"></i> {{ vaultProp.creator.name }}</h6>
+        <h6 class="card-subtitle text-muted"><router-link :to="{name: 'Profile', params: {profileId: keepProp.creatorId}}"><i class="far fa-user profile"></i></router-link> {{ keepProp.creator.name }}</h6>
       </div>
       <div class="card-body">
-        <p class="card-text">{{ vaultProp.description }}</p> 
+        <img :src="keepProp.img" class="img-fluid" alt="Responsive image">
       </div>
-      
+      <div class="card-footer see-through-white py-1">
+        <p class="card-text">{{ keepProp.description }}</p>        
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "profile-vaults-component",
-  props: ["vaultProp"],
+  name: "vault-keeps-component",
+  props: ["keepProp"],
   components: {},
   
   mounted() {},
@@ -25,13 +27,13 @@ export default {
   computed: {},
   methods: {
    
-    setActiveVault() {           
-      this.$store.dispatch("getActiveVault", this.vaultProp.id);      
+    setActiveKeep() {           
+      this.$store.dispatch("getActiveKeep", this.keepProp.id);      
     },
 
     
     // creatorLink(){
-    //   console.log("creatorId", this.vaultProp.creatorId)
+    //   console.log("creatorId", this.keepProp.creatorId)
     //  this.$store.dispatch
     // },
   

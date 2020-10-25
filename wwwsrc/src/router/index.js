@@ -4,6 +4,8 @@ import VueRouter from "vue-router";
 import Home from "../pages/Home.vue";
 // @ts-ignore
 import Profile from "../pages/ProfilePage.vue";
+// @ts-ignore
+import Vault from "../pages/VaultPage.vue";
 
 Vue.use(VueRouter);
 
@@ -17,6 +19,11 @@ const routes = [
     path: "/profile/:profileId",
     name: "Profile",
     component: Profile,
+  },
+  {
+    path: "/vault/:vaultId",
+    name: "Vault",
+    component: Vault,
   }
 ];
 
