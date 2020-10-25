@@ -10,7 +10,8 @@
         <img :src="keepProp.img" class="img-fluid" alt="Responsive image">
       </div>
       <div class="card-footer see-through-white py-1">
-        <p class="card-text">{{ keepProp.description }}</p>        
+        <p class="card-text">{{ keepProp.description }}</p>     
+        <p>   <i class="far fa-times-circle" @click="deleteKeep"></i></p>
       </div>
     </div>
   </div>
@@ -30,6 +31,9 @@ export default {
     setActiveKeep() {           
       this.$store.dispatch("getActiveKeep", this.keepProp.id);      
     },
+    deleteKeep(){
+      this.$store.dispatch("deleteKeep", this.keepProp.id)
+    }
 
     
     // creatorLink(){

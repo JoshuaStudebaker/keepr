@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import { api } from "../services/AxiosService.js";
+import SweetAlert from "../services/SweetAlert.js";
 
 Vue.use(Vuex);
 
@@ -40,7 +41,10 @@ export default new Vuex.Store({
     },
     keepFormToggle(state) {
       state.keepForm = !state.keepForm
-    }
+    },
+     deleteKeep(state, keepId) {
+      state.creatorKeeps = state.creatorKeeps.filter((k) => k.id != keepId);
+    },
   },
   actions: {
     async getProfile({ commit }) {
@@ -120,6 +124,17 @@ export default new Vuex.Store({
       console.log("createKeep - res", res);
       commit("setProfileKeeps", [...state.creatorKeeps, res.data]);
       
+    },
+
+        async deleteKeep({ commit }, keepId) {
+      if (
+        await SweetAlert.sweetDelete(
+         
+        )
+      ) {
+        await api.delete("keeps/" + keepId);
+        commit("deleteKeep", keepId);
+      }
     },
   },
 });
