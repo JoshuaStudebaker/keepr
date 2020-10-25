@@ -8,6 +8,7 @@
       </div>
       <div class="card-body">
         <p class="card-text">{{ vaultProp.description }}</p> 
+         <p>   <i class="far fa-times-circle" @click="deleteVault"></i></p>
       </div>
       
     </div>
@@ -29,7 +30,9 @@ export default {
       this.$store.dispatch("getActiveVault", this.vaultProp.id);      
     },
 
-    
+    deleteVault(){
+      this.$store.dispatch("deleteVault", this.vaultProp.id)
+    }
     // creatorLink(){
     //   console.log("creatorId", this.vaultProp.creatorId)
     //  this.$store.dispatch
