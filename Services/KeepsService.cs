@@ -9,10 +9,12 @@ namespace Keepr.Services
   public class KeepsService
   {
     private readonly KeepsRepository _repo;
+    private readonly VaultsRepository _vaultsRepository;
 
-    public KeepsService(KeepsRepository repo)
+    public KeepsService(KeepsRepository repo, VaultsRepository vaultsRepository)
     {
       _repo = repo;
+      _vaultsRepository = vaultsRepository;
     }
 
     // 
@@ -40,6 +42,13 @@ namespace Keepr.Services
     internal IEnumerable<Keep> GetByCreatorId(string creatorId)
     {
       return _repo.GetByCreatorId(creatorId).ToList();
+    }
+
+    internal IEnumerable<Keep> GetKeepsByVaultId(int vaultId)
+    {
+      Vault vaultOfKeeps = _vaultsRepository.GetById(vaultId);
+      if (vaultOfKeeps == null) { throw new Exception("invalid Id / No longer exists"); }
+      return _repo.getKeepsByVaultId(vaultId);
     }
 
     internal object Delete(int id, string userId)

@@ -12,6 +12,4 @@ namespace Keepr.Models
     public Profile Creator { get; set; }
   }
 
-
-
 }

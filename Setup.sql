@@ -60,10 +60,10 @@
 -- VALUES
 -- ("8700cd9b-3848-4114-9936-c047349efa80", "First Ever Vault", "Love MySql", 1)
 
-INSERT INTO vaultkeeps
-(creatorId, vaultId, kidId)
-VALUES
-("8700cd9b-3848-4114-9936-c047349efa80", 1, 1)
+-- INSERT INTO vaultkeeps
+-- (creatorId, vaultId, keepId)
+-- VALUES
+-- ("8700cd9b-3848-4114-9936-c047349efa80", 1, 1)
 
 -- INSERT INTO vaults
 -- (creatorId, name)

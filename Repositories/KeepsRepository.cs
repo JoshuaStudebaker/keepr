@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -59,6 +60,8 @@ SELECT LAST_INSERT_ID();
 
     }
 
+
+
     internal IEnumerable<Keep> GetAll()
     {
       string sql = creatorSql;
@@ -76,6 +79,19 @@ SELECT LAST_INSERT_ID();
         keep.Creator = profile; return keep;
       }, new { id }, splitOn: "id").FirstOrDefault();
 
+    }
+
+    internal IEnumerable<Keep> getKeepsByVaultId(int vaultId)
+    {
+      string sql = @"
+      SELECT k.*,
+      vk.id as VaultKeepId
+      FROM vaultkeeps vk
+      JOIN keeps k on k.id = vk.keepId
+      WHERE vaultId = @vaultId
+      ";
+
+      return _db.Query<VaultKeepViewModel>(sql, new { vaultId });
     }
 
     // REVIEW THANK ABOUT HOW TO DO EDIT
