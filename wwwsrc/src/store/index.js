@@ -184,6 +184,12 @@ export default new Vuex.Store({
       
     },
 
+    async addKeepToVault({ commit }, vaultKeep) {
+      console.log("addKeepToVault", vaultKeep)
+      let res = await api.post("vaultkeeps", vaultKeep)
+      console.log("vaultkeep store", res.data)
+    },
+
         async deleteVault({ commit }, vaultId) {
       if (
         await SweetAlert.sweetDelete(

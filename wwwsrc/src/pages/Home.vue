@@ -15,7 +15,7 @@
        <div class="row justify-content-center"><p>{{activeKeep.description}}</p></div>
        <div class="row">
          <form @submit.prevent="addToVault">
-         <select class="custom-select" v-model="vault.num">
+         <select class="custom-select" v-model="vaultKeep.vaultId">
   <option selected>Add to Vault</option>
   <option v-for="uv in userVaults" :key="uv.id" :value="uv.id">
     {{uv.name}}</option>
@@ -44,7 +44,7 @@ export default {
   },
   data() {
     return {
-     vault: {},     
+     vaultKeep: {},     
     };
   },
   mounted() {
@@ -73,7 +73,10 @@ export default {
     },
 
     addToVault(){
-      console.log("add to vault", this.vault.num)
+      console.log("add to vault", this.vaultKeep.vaultId)
+      this.vaultKeep.keepId = this.activeKeep.id
+      console.log("vaultkeep", this.vaultKeep)
+      this.$store.dispatch("addKeepToVault", this.vaultKeep)
     }
   }
 };
