@@ -13,12 +13,14 @@
        </div>
        <div class="row justify-content-center"><h1>{{activeKeep.name}}</h1></div>
        <div class="row justify-content-center"><p>{{activeKeep.description}}</p></div>
-       <div class="row"><select class="custom-select">
+       <div class="row">
+         <select class="custom-select">
   <option selected>Open this select menu</option>
-  <option value="1">One</option>
-  <option value="2">Two</option>
-  <option value="3">Three</option>
-</select></div>
+  <option v-for="uv in userVaults" :key="uv.id" :value="uv.id">
+    {{uv.name}}</option>
+</select>
+ 
+</div>
        </div>
       </div>
       </transition>
@@ -53,6 +55,9 @@ export default {
 
     userVaults(){
      return this.$store.state.userVaults
+    },
+    userVaultsSelectionString(){
+      return this.$store.state.userVaultsSelectionString
     }
     
   },
