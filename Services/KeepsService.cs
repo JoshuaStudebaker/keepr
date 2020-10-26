@@ -39,6 +39,17 @@ namespace Keepr.Services
       return activeKeep;
     }
 
+     internal Keep Patch(KeepPatch keepPatch)
+    {
+      Keep keep = _repo.GetById(keepPatch.Id);
+      if (keep == null) { throw new Exception("Invalid Id / No longer exists"); }
+      keep.Views = keepPatch.Views;
+      keep.Keeps = keepPatch.Keeps;
+      Keep updatedKeep = _repo.Update(keep);
+      return _repo.GetById(updatedKeep.Id);
+    }
+
+
     internal IEnumerable<Keep> GetByCreatorId(string creatorId)
     {
       return _repo.GetByCreatorId(creatorId).ToList();

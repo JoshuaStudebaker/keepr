@@ -51,7 +51,10 @@ export default new Vuex.Store({
     },
      deleteVault(state, vaultId) {
       state.creatorVaults = state.creatorVaults.filter((v) => v.id != vaultId);
-    }
+    },
+     modalToggleFalse(state) {
+       state.modalToggle = false
+     }
   },
   actions: {
     async getProfile({ commit }) {
@@ -68,6 +71,7 @@ export default new Vuex.Store({
         let res = await api.get("keeps");
         console.log("get keeps", res);
         commit("setAllKeeps", res.data);
+        commit("modalToggleFalse")
       } catch (error) {
         console.error("cannot get keeps - sorry");
       }

@@ -22,4 +22,11 @@ namespace Keepr.Models
     public int VaultKeepId { get; set; }
   }
 
+  public class KeepPatch
+  {
+    public int Id {get; set;}
+    public int Views {get; set;}
+    public int Keeps {get; set;}
+  }
+
 }

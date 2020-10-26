@@ -64,6 +64,21 @@ namespace Keepr.Controllers
         return BadRequest(error.Message);
       }
     }
+
+    [HttpPatch("{id}")]
+    public ActionResult<Keep> Patch(int id, [FromBody] KeepPatch keepPatchBody)
+    {
+      try
+      {
+        keepPatchBody.Id = id;
+        Keep updatedKeep = _service.Patch(keepPatchBody);        
+        return Ok(updatedKeep);
+      }
+      catch (System.Exception error)
+      {
+        return BadRequest(error.Message);
+      }
+    }
     [HttpDelete("{id}")]
     [Authorize]
     public async Task<ActionResult<string>> Delete(int id)

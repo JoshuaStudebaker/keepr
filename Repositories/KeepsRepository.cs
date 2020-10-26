@@ -108,6 +108,23 @@ SELECT LAST_INSERT_ID();
     }
 
     // REVIEW THINK ABOUT HOW TO DO EDIT
+     internal Keep Update(Keep updatedKeep)
+    {
+        string sql = @"
+            UPDATE keeps
+            SET
+            creatorId = @CreatorId,
+            name = @Name,
+            description = @Description,
+            img = @Img,
+            views = @Views,
+            shares = @Shares,
+            keeps = @Keeps
+            WHERE id = @Id;";
+            _db.Execute(sql, updatedKeep);
+            return updatedKeep;
+    }
+
 
     internal IEnumerable<Keep> GetByCreatorId(string creatorId)
     {

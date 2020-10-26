@@ -1,6 +1,6 @@
 <template>
   
-    <div class="card see-through rounded" v-if="activeKeep.name">
+    <div class="card see-through rounded">
       <div class="card-header see-through-white">
         <h5 class="card-title">{{ activeKeep.name }}</h5>
         <h6 class="card-subtitle text-muted">By: {{ activeKeep.creator.name }}</h6>
