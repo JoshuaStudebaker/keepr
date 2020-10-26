@@ -147,6 +147,21 @@ export default new Vuex.Store({
         let res = await api.get("keeps/" + keepId);
         console.log("active keep", res);
         commit("setActiveKeep", res.data);
+        this.dispatch("addViews", keepId)
+      } catch (error) {
+        console.error("cannot get keep - sorry");
+      }
+    },
+      
+       async addViews({ commit, state }, keepId) {
+      try {
+        console.log("add view?", keepId); 
+        let keepPatch = {};
+        keepPatch.views = state.activeKeep.views + 1
+        keepPatch.keeps = state.activeKeep.keeps    
+        let res = await api.patch("keeps/" + keepId, keepPatch);
+        console.log("addView", res);
+        commit("setActiveKeep", res.data);        
       } catch (error) {
         console.error("cannot get keep - sorry");
       }

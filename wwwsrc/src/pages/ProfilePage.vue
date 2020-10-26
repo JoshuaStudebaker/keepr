@@ -10,13 +10,10 @@
 </template>
 
 <script>
-
-
   import profileKeepsComponent from "../components/ProfileKeepsComponent";
   import profileVaultsComponent from "../components/ProfileVaultsComponent";
   import keepsFormComponent from "../components/KeepsFormComponent";
   import vaultsFormComponent from "../components/VaultsFormComponent"
-
 export default {
   name: "profile-page",
   components: {
