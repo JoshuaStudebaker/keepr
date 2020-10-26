@@ -28,7 +28,7 @@ export default {
     activeKeepComponent
   },
   mounted() {
-    this.$store.dispatch("getAllKeeps");
+    this.$store.dispatch("getAllKeeps");    
   },
   computed: {
     keeps() {
@@ -39,6 +39,10 @@ export default {
     },
     modalToggle(){
       return this.$store.state.modalToggle
+    },
+
+    userVaults(){
+     return this.$store.state.userVaults
     }
     
   },

@@ -28,7 +28,8 @@ export default {
   methods: {
    
     setActiveKeep() {           
-      this.$store.dispatch("getActiveKeep", this.keepProp.id);      
+      this.$store.dispatch("getActiveKeep", this.keepProp.id);  
+      this.$store.dispatch("getUserVaults")    
     },
 
     
