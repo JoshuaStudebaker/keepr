@@ -16,8 +16,7 @@ export default new Vuex.Store({
     vaultKeeps: [],
     keepForm: false,
     vaultForm: false,
-    userVaults: [],
-    userVaultsSelectionString: {}
+    userVaults: []
   },
   mutations: {
     setProfile(state, profile) {
@@ -59,10 +58,8 @@ export default new Vuex.Store({
     },
     setUserVaults(state, userVaults) {
        state.userVaults = userVaults
-    },
-    setUserVaultsSelectionString(state, str) {
-      state.userVaultsSelectionString.name = str
     }
+    
      
   },
   actions: {
@@ -123,7 +120,7 @@ export default new Vuex.Store({
     },
    
    
-   async getUserVaults({ state, commit, dispatch}) {
+   async getUserVaults({ state, commit}) {
        
      try {
        
@@ -131,31 +128,13 @@ export default new Vuex.Store({
         console.log("user vaults??", userId);       
         let res = await api.get("profiles/" + userId +"/vaults");
         console.log("user vaults?", res);
-       commit("setUserVaults", res.data);
-       dispatch("createUserVaultsSelectionString")
+       commit("setUserVaults", res.data);       
       } catch (error) {
         console.error("cannot get user vaults - sorry");
       }
     },
  
-async createUserVaultsSelectionString({ state, commit, dispatch}) {
-       
-     try {
-       let str =""
-        let userVaults = state.userVaults
-       console.log("user vault string??", str, userVaults); 
-       for (let i = 0; i < userVaults.length; i++){
-         let uv = userVaults[i]         
-         str += "<option value='" + uv.id + "'>" + uv.name + "</option>"
-         console.log("uv", i, uv, str)
-       }
-       console.log("full string", str)
-       commit("setUserVaultsSelectionString", str)
-      
-      } catch (error) {
-        console.error("cannot get user vaults - sorry");
-      }
-    },
+
     getCreator({ dispatch }, creatorId) {
       console.log("getcreator", creatorId)
       dispatch("getProfileVaults", creatorId)

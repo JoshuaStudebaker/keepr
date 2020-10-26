@@ -14,11 +14,14 @@
        <div class="row justify-content-center"><h1>{{activeKeep.name}}</h1></div>
        <div class="row justify-content-center"><p>{{activeKeep.description}}</p></div>
        <div class="row">
-         <select class="custom-select">
-  <option selected>Open this select menu</option>
+         <form @submit.prevent="addToVault">
+         <select class="custom-select" v-model="vault.num">
+  <option selected>Add to Vault</option>
   <option v-for="uv in userVaults" :key="uv.id" :value="uv.id">
     {{uv.name}}</option>
 </select>
+  <button type="submit" class="btn btn-primary">Submit</button>
+         </form>
  
 </div>
        </div>
@@ -39,6 +42,11 @@ export default {
     allKeepsComponent,
     // activeKeepComponent
   },
+  data() {
+    return {
+     vault: {},     
+    };
+  },
   mounted() {
     this.$store.dispatch("getAllKeeps");    
   },
@@ -55,15 +63,17 @@ export default {
 
     userVaults(){
      return this.$store.state.userVaults
-    },
-    userVaultsSelectionString(){
-      return this.$store.state.userVaultsSelectionString
     }
+   
     
   },
   methods: {
     returnKeeps(){
       this.$store.commit("returnAllKeeps")
+    },
+
+    addToVault(){
+      console.log("add to vault", this.vault.num)
     }
   }
 };
