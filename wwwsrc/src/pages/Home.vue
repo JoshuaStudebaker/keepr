@@ -7,9 +7,19 @@
     <div class="row">
       <transition name="slide-fade">
       <div v-if="modalToggle" class="modal-overlay d-flex">
-       <div class="col-6 p-2"><img :src="activeKeep.img" class="img-fluid" alt="Responsive image"> </div> <div class="col-6"><div class="row justify-content-end px-2"><i class="far fa-times-circle x-out" @click="returnKeeps"></i></div><div class="row justify-content-center">
+       <div class="col-6 p-2"><img :src="activeKeep.img" class="img-fluid" alt="Responsive image"> </div> 
+       <div class="col-6"><div class="row justify-content-end px-2"><i class="far fa-times-circle x-out" @click="returnKeeps"></i></div><div class="row justify-content-center">
        <div class="m-2"> <i class="far fa-eye"></i> <span class="p-1">{{activeKeep.views}} </span></div><div class="m-2"><i class="fab fa-fort-awesome"></i><span class="p-1">{{activeKeep.keeps}}</span></div>
-       </div><div class="row justify-content-center"><h1>{{activeKeep.name}}</h1></div></div>
+       </div>
+       <div class="row justify-content-center"><h1>{{activeKeep.name}}</h1></div>
+       <div class="row justify-content-center"><p>{{activeKeep.description}}</p></div>
+       <div class="row"><select class="custom-select">
+  <option selected>Open this select menu</option>
+  <option value="1">One</option>
+  <option value="2">Two</option>
+  <option value="3">Three</option>
+</select></div>
+       </div>
       </div>
       </transition>
       <!-- <active-keep-component></active-keep-component> -->
@@ -19,13 +29,13 @@
 
 <script>
 import allKeepsComponent from "../components/AllKeepsComponent";
-import activeKeepComponent from "../components/ActiveKeepComponent"
+// import activeKeepComponent from "../components/ActiveKeepComponent"
 
 export default {
   name: "home",
   components: {
     allKeepsComponent,
-    activeKeepComponent
+    // activeKeepComponent
   },
   mounted() {
     this.$store.dispatch("getAllKeeps");    
