@@ -166,6 +166,20 @@ export default new Vuex.Store({
         console.error("cannot get keep - sorry");
       }
     },
+       
+      async addKeepCount({ commit, state }, keepId) {
+      try {
+        console.log("add view?", keepId); 
+        let keepPatch = {};
+        keepPatch.views = state.activeKeep.views
+        keepPatch.keeps = state.activeKeep.keeps + 1 
+        let res = await api.patch("keeps/" + keepId, keepPatch);
+        console.log("addView", res);
+        commit("setActiveKeep", res.data);        
+      } catch (error) {
+        console.error("cannot get keep - sorry");
+      }
+    },  
       
        async createKeep({ commit, state }, newKeep) {
       console.log("createKeep", newKeep);
@@ -199,10 +213,11 @@ export default new Vuex.Store({
       
     },
 
-    async addKeepToVault({ commit }, vaultKeep) {
+    async addKeepToVault({ commit, dispatch}, vaultKeep) {
       console.log("addKeepToVault", vaultKeep)
       let res = await api.post("vaultkeeps", vaultKeep)
       console.log("vaultkeep store", res.data)
+      dispatch("addKeepCount", vaultKeep.keepId)
     },
 
         async deleteVault({ commit }, vaultId) {
