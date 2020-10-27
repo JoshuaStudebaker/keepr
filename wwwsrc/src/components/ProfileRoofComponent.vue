@@ -1,6 +1,16 @@
 <template>
  <div class="row">
-   <p>{{creatorCount.keepCount}} , {{creatorCount.vaultCount}}</p>
+   <div class="card text-left">
+     <img class="card-img-top" src="holder.js/100px180/" alt="">
+     <div class="card-body">
+       <h4 class="card-title">Title</h4>
+       <p class="card-text">Body</p> 
+       <p>{{creatorKeeps.length}} , {{creatorVaults.length}}</p>
+   <p>{{creatorInfo.name}}</p>
+   <img :src="creatorInfo.picture"/>
+     </div>
+   </div>
+  
  </div>
 </template>
 
@@ -12,13 +22,24 @@ export default {
   
   mounted() {
      this.$store.dispatch("getProfile");
-     this.$store.dispatch("getProfileInfo");
+      // this.$store.dispatch("getCreator", this.$route.params.profileId);
   },
 
   computed: {
-    creatorCount(){
-      return this.$store.state.creatorCount
-    },
+    creatorKeeps() {
+      return this.$store.state.creatorKeeps;
+    }, 
+
+    creatorVaults() {
+      return this.$store.state.creatorVaults;
+    }, 
+
+    creatorInfo(){
+      return this.$store.state.creatorInfo
+    }
+    // creatorCount(){
+    //   return this.$store.state.creatorCount
+    // },
     // creator(){
     //   return 
     // }

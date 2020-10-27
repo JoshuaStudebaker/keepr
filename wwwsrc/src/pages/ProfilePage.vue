@@ -7,6 +7,7 @@
      <vaults-form-component v-if="vaultForm"/>
      <profile-vaults-component v-for="iVault in creatorVaults" :key="iVault.id" :vaultProp="iVault"/>
      <profile-keeps-component v-for="iKeep in creatorKeeps" :key="iKeep.id" :keepProp="iKeep"/>
+     <p>{{creatorKeeps.length}}</p>
   </div>
 </template>
 

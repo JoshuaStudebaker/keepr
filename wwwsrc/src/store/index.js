@@ -17,7 +17,8 @@ export default new Vuex.Store({
     keepForm: false,
     vaultForm: false,
     userVaults: [],
-    creatorCount: {}
+    creatorCount: {},
+    creatorInfo: {}
   },
   mutations: {
     setProfile(state, profile) {
@@ -43,8 +44,8 @@ export default new Vuex.Store({
       state.creatorVaults = profileVaults
     },
 
-    setCreatorCount(state, createrCount) {
-      state.creatorCount = createrCount
+    setCreatorCount(state, creatorCount) {
+      state.creatorCount = creatorCount
     },
     keepFormToggle(state) {
       state.keepForm = !state.keepForm
@@ -66,7 +67,13 @@ export default new Vuex.Store({
     },
      removeFromVault(state, vaultKeepId) {
       state.vaultKeeps = state.vaultKeeps.filter((k) => k.vaultKeepId != vaultKeepId);
-    }
+    },
+     setCreatorInfo(state, creator) {
+       state.creatorInfo.name = creator.name;
+       state.creatorInfo.picture = creator.picture;
+      //  state.creatorInfo.keepCount = state.creatorKeeps.length;
+      //  state.creatorInfo.vaultCount - state.creatorVaults.length;
+     }
      
   },
   actions: {
