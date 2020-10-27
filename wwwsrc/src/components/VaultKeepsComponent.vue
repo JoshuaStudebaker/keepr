@@ -10,7 +10,8 @@
         <img :src="keepProp.img" class="img-fluid" alt="Responsive image">
       </div>
       <div class="card-footer see-through-white py-1">
-        <p class="card-text">{{ keepProp.description }}</p>        
+        <p class="card-text">{{ keepProp.description }}</p>     
+        <button type="button" class="btn btn-warning" @click="removeKeepFromVault">Remove from Vault</button>
       </div>
     </div>
   </div>
@@ -25,19 +26,15 @@ export default {
   mounted() {},
 
   computed: {},
-  methods: {
-   
+  methods: {   
     setActiveKeep() {           
-      this.$store.dispatch("getActiveKeep", this.keepProp.id);      
+      this.$store.dispatch("getActiveKeep", this.keepProp.id); 
     },
-
-    
-    // creatorLink(){
-    //   console.log("creatorId", this.keepProp.creatorId)
-    //  this.$store.dispatch
-    // },
+      removeKeepFromVault(){
+this.$store.dispatch("removeFromVault", this.keepProp)
+    }
+    }, 
   
-  },
 };
 </script>
 

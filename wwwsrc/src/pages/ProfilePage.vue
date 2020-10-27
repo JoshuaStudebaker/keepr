@@ -48,8 +48,8 @@ export default {
       return this.$store.state.vaultForm
     }
     
-  },methods: {
-   
+  },
+  methods: {   
     returnAllKeeps() {           
       this.$store.commit("returnAllKeeps");      
     },
