@@ -96,8 +96,8 @@ SELECT LAST_INSERT_ID();
     {
       string sql = @"
       SELECT keep.*,
-      profile.*,
-      vaultKeep.id as VaultKeepId
+      vaultKeep.id as VaultKeepId,
+      profile.*
       FROM vaultkeeps vaultKeep
       LEFT JOIN keeps keep on keep.id = vaultKeep.keepId
       INNER JOIN profiles profile on keep.creatorId = profile.id
