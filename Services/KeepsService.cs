@@ -55,10 +55,14 @@ namespace Keepr.Services
       return _repo.GetByCreatorId(creatorId).ToList();
     }
 
-    internal IEnumerable<VaultKeepViewModel> GetKeepsByVaultId(int vaultId)
+    internal IEnumerable<VaultKeepViewModel> GetKeepsByVaultId(int vaultId, string userId)
     {
       Vault vaultOfKeeps = _vaultsRepository.GetById(vaultId);
       if (vaultOfKeeps == null) { throw new Exception("invalid Id / No longer exists"); }
+      if (vaultOfKeeps.CreatorId != userId && vaultOfKeeps.IsPrivate == true)
+      {
+        throw new Exception("Access Denied");
+      }
 
       // NOTE the original way I solved it, before realizing I had to to move the vk.id = vaultKeepId up above above profile (without the FROM statememt)
       // List<VaultKeepViewModel> noCreator = _repo.getKeepsByVaultId(vaultId).ToList();
