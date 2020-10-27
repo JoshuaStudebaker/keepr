@@ -123,5 +123,18 @@ export default {
     cursor: pointer;
     font-size: 1.1rem;
   }
+@media screen and (max-width: 700px) {
+  .card-columns {  
+    column-count: 2;
+  }
+}
+@media screen and (min-width: 701px) {
+  .card-columns {  
+    column-count: 4;
+  }
+}
+
+  
+
 
 </style>
