@@ -60,6 +60,7 @@ namespace Keepr.Services
       Vault vaultOfKeeps = _vaultsRepository.GetById(vaultId);
       if (vaultOfKeeps == null) { throw new Exception("invalid Id / No longer exists"); }
 
+      // NOTE the original way I solved it, before realizing I had to to move the vk.id = vaultKeepId up above above profile (without the FROM statememt)
       // List<VaultKeepViewModel> noCreator = _repo.getKeepsByVaultId(vaultId).ToList();
       // List<VaultKeepViewModel> noVaultKeepId = _repo.getKeeps2ByVaultId(vaultId).ToList();
 

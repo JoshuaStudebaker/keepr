@@ -23,11 +23,12 @@ namespace Keepr.Controllers
 
     [HttpGet]
     // REVIEW maybe need async task action 
-    public ActionResult<IEnumerable<Vault>> GetAll()
+    public async Task<ActionResult<IEnumerable<Vault>>> GetAll()
     {
       try
       {
-        return Ok(_service.GetAll());
+        Profile userInfo = await HttpContext.GetUserInfoAsync<Profile>();
+        return Ok(_service.GetAll(userInfo?.Id));
       }
       catch (Exception error)
       {
@@ -36,11 +37,12 @@ namespace Keepr.Controllers
     }
 
     [HttpGet("{id}")]
-    public ActionResult<IEnumerable<Vault>> GetById(int id)
+    public async Task<ActionResult<IEnumerable<Vault>>> GetById(int id)
     {
       try
       {
-        return Ok(_service.GetById(id));
+        Profile userInfo = await HttpContext.GetUserInfoAsync<Profile>();
+        return Ok(_service.GetById(id, userInfo?.Id));
       }
       catch (Exception error)
       {

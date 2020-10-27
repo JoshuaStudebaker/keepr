@@ -68,12 +68,12 @@ namespace Keepr.Controllers
       }
     }
     [HttpGet("{id}/vaults")]
-    public ActionResult<Profile> GetVaultsByCreatorId(string id)
+    public async Task<ActionResult<Profile>> GetVaultsByCreatorId(string id)
     {
       try
       {
-
-        return Ok(_vaultsService.GetByCreatorId(id));
+        Profile userInfo = await HttpContext.GetUserInfoAsync<Profile>();
+        return Ok(_vaultsService.GetByCreatorId(id, userInfo?.Id));
       }
       catch (Exception e)
       {

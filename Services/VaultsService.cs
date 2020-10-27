@@ -22,25 +22,30 @@ namespace Keepr.Services
       return newVault;
     }
 
-    internal IEnumerable<Vault> GetAll()
+    internal IEnumerable<Vault> GetAll(string userId)
     {
       IEnumerable<Vault> vaults = _repo.GetAll();
-      return vaults.ToList();
+      return vaults.ToList().FindAll(v => v.CreatorId == userId || v.IsPrivate == false);
     }
 
-    internal Vault GetById(int id)
+    internal IEnumerable<Vault> GetByCreatorId(string creatorId, string userId)
+    {
+      IEnumerable<Vault> vaults = _repo.GetByCreatorId(creatorId).ToList();
+      return vaults.ToList().FindAll(v => v.CreatorId == userId || v.IsPrivate == false);
+    }
+    internal Vault GetById(int id, string userId)
     {
       Vault activeVault = _repo.GetById(id);
       if (activeVault == null)
       { throw new Exception("Invalid Id / No Longer exists"); }
+      if (activeVault.IsPrivate == true && userId != activeVault.CreatorId)
+      {
+        throw new Exception("Access Denied!");
+      }
 
       return activeVault;
     }
 
-    internal IEnumerable<Vault> GetByCreatorId(string creatorId)
-    {
-      return _repo.GetByCreatorId(creatorId).ToList();
-    }
 
     internal object Delete(int id, string userId)
     {
