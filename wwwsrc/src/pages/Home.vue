@@ -2,7 +2,8 @@
   <div class="home">
     <!-- <h1 >Welcome</h1> -->
     <div class="row" v-if="!modalToggle">
-      <all-keeps-component v-for="iKeep in keeps" :key="iKeep.id" :keepProp="iKeep"/>
+      <div class="card-columns">
+      <all-keeps-component v-for="iKeep in keeps" :key="iKeep.id" :keepProp="iKeep"/></div>
     </div>
     <div class="row">
       <transition name="slide-fade">

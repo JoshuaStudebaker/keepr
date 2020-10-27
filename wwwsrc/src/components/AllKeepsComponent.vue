@@ -1,5 +1,5 @@
 <template>
-  <div class="col-4">
+  <!-- <div class="col-4"> -->
     <div class="card see-through rounded">
       <div class="card-header see-through-white">
         <h5 class="card-title active-keep-button" @click="setActiveKeep()">{{ keepProp.name }}</h5>
@@ -13,7 +13,7 @@
         <p class="card-text">{{ keepProp.description }}</p>        
       </div>
     </div>
-  </div>
+  <!-- </div> -->
 </template>
 
 <script>
