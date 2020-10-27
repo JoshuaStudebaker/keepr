@@ -39,7 +39,7 @@ namespace Keepr.Services
       return activeKeep;
     }
 
-     internal Keep Patch(KeepPatch keepPatch)
+    internal Keep Patch(KeepPatch keepPatch)
     {
       Keep keep = _repo.GetById(keepPatch.Id);
       if (keep == null) { throw new Exception("Invalid Id / No longer exists"); }
@@ -55,11 +55,24 @@ namespace Keepr.Services
       return _repo.GetByCreatorId(creatorId).ToList();
     }
 
-    internal IEnumerable<Keep> GetKeepsByVaultId(int vaultId)
+    internal IEnumerable<VaultKeepViewModel> GetKeepsByVaultId(int vaultId)
     {
       Vault vaultOfKeeps = _vaultsRepository.GetById(vaultId);
       if (vaultOfKeeps == null) { throw new Exception("invalid Id / No longer exists"); }
-      return _repo.getKeepsByVaultId(vaultId);
+
+      List<VaultKeepViewModel> noCreator = _repo.getKeepsByVaultId(vaultId).ToList();
+      List<VaultKeepViewModel> noVaultKeepId = _repo.getKeeps2ByVaultId(vaultId).ToList();
+
+      for (int i = 0; i < noCreator.Count(); i++)
+      {
+        noCreator[i].Creator = noVaultKeepId[i].Creator;
+      }
+      IEnumerable<VaultKeepViewModel> full = noCreator.AsEnumerable();
+      //  IEnumerable<Keep> full
+
+
+      // return _repo.getKeepsByVaultId(vaultId);
+      return full;
     }
 
     internal object Delete(int id, string userId)

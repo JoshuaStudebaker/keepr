@@ -80,16 +80,19 @@ SELECT LAST_INSERT_ID();
       }, new { id }, splitOn: "id").FirstOrDefault();
 
     }
-    // private readonly string creatorSql = @"SELECT 
-    //     keep.*,
-    //     profile.* 
-    //     FROM keeps keep 
-    //     JOIN profiles profile on keep.creatorId = profile.id ";
-    //  return _db.Query<Keep, Profile, Keep>(sql, (keep, profile) =>
-    //       {
-    //         keep.Creator = profile; return keep;
-    //       }, splitOn: "id")
-    internal IEnumerable<Keep> getKeepsByVaultId(int vaultId)
+    internal IEnumerable<VaultKeepViewModel> getKeepsByVaultId(int vaultId)
+    {
+      string sql = @"
+      SELECT keep.*,    
+      vaultKeep.id as VaultKeepId
+      FROM vaultkeeps vaultKeep
+     JOIN keeps keep on keep.id = vaultKeep.keepId
+      WHERE vaultId = @vaultId
+      ";
+      return _db.Query<VaultKeepViewModel>(sql, new { vaultId });
+    }
+
+    internal IEnumerable<VaultKeepViewModel> getKeeps2ByVaultId(int vaultId)
     {
       string sql = @"
       SELECT keep.*,
@@ -107,10 +110,9 @@ SELECT LAST_INSERT_ID();
       }, new { vaultId }, splitOn: "id");
     }
 
-    // REVIEW THINK ABOUT HOW TO DO EDIT
-     internal Keep Update(Keep updatedKeep)
+    internal Keep Update(Keep updatedKeep)
     {
-        string sql = @"
+      string sql = @"
             UPDATE keeps
             SET
             creatorId = @CreatorId,
@@ -121,8 +123,8 @@ SELECT LAST_INSERT_ID();
             shares = @Shares,
             keeps = @Keeps
             WHERE id = @Id;";
-            _db.Execute(sql, updatedKeep);
-            return updatedKeep;
+      _db.Execute(sql, updatedKeep);
+      return updatedKeep;
     }
 
 
