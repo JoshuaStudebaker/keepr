@@ -58,8 +58,10 @@ export default new Vuex.Store({
     },
     setUserVaults(state, userVaults) {
        state.userVaults = userVaults
+    },
+     removeFromVault(state, vaultKeepId) {
+      state.vaultKeeps = state.vaultKeeps.filter((k) => k.vaultKeepId != vaultKeepId);
     }
-    
      
   },
   actions: {
@@ -213,21 +215,21 @@ export default new Vuex.Store({
       
     },
 
-    async addKeepToVault({ commit, dispatch}, vaultKeep) {
+    async addKeepToVault({ dispatch}, vaultKeep) {
       console.log("addKeepToVault", vaultKeep)
       let res = await api.post("vaultkeeps", vaultKeep)
       console.log("vaultkeep store", res.data)
       dispatch("addKeepCount", vaultKeep.keepId)
     },
 
-    async removeFromVault({ commit, dispatch }, keep) {
+    async removeFromVault({ commit}, vaultKeepId) {
       if (
         await SweetAlert.sweetDelete()
       )
-      console.log("addKeepToVault", keep.vaultKeepId)
-      let res = await api.delete("vaultkeeps", keep.vaultKeepId)
+      console.log("DeleteKeepFromVault", vaultKeepId)
+      let res = await api.delete("vaultkeeps/" + vaultKeepId)
+      commit("removeFromVault", vaultKeepId)     
      
-      dispatch("getVaultKeeps", keep.vaultId)
     },
 
         async deleteVault({ commit }, vaultId) {

@@ -31,7 +31,7 @@ export default {
       this.$store.dispatch("getActiveKeep", this.keepProp.id); 
     },
       removeKeepFromVault(){
-this.$store.dispatch("removeFromVault", this.keepProp)
+this.$store.dispatch("removeFromVault", this.keepProp.vaultKeepId)
     }
     }, 
   
