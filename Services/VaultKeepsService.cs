@@ -20,12 +20,16 @@ namespace Keepr.Services
       return newVaultKeep;
     }
 
-    internal void Delete(int id)
+    internal void Delete(int id, string userId)
     {
       var vk = _repo.GetById(id);
       if (vk == null)
       {
         throw new Exception("Invalid Id");
+      }
+      if (vk.CreatorId != userId)
+      {
+        throw new Exception("Access Denied");
       }
       _repo.Delete(id);
     }
