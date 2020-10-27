@@ -41,6 +41,19 @@ namespace Keepr.Controllers
         return BadRequest(e.Message);
       }
     }
+
+    [HttpGet("{id}")]
+    public ActionResult<IEnumerable<Profile>> GetById(string id)
+    {
+      try
+      {
+        return Ok(_profilesService.GetById(id));
+      }
+      catch (Exception error)
+      {
+        return BadRequest(error.Message);
+      }
+    }
     [HttpGet("{id}/keeps")]
     public ActionResult<Profile> GetKeepsByCreatorId(string id)
     {

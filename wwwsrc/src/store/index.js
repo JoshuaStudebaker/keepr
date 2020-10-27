@@ -16,7 +16,8 @@ export default new Vuex.Store({
     vaultKeeps: [],
     keepForm: false,
     vaultForm: false,
-    userVaults: []
+    userVaults: [],
+    creatorCount: {}
   },
   mutations: {
     setProfile(state, profile) {
@@ -40,6 +41,10 @@ export default new Vuex.Store({
     },
     setProfileVaults(state, profileVaults) {
       state.creatorVaults = profileVaults
+    },
+
+    setCreatorCount(state, createrCount) {
+      state.creatorCount = createrCount
     },
     keepFormToggle(state) {
       state.keepForm = !state.keepForm
@@ -69,11 +74,18 @@ export default new Vuex.Store({
       try {
         let res = await api.get("profiles");
         commit("setProfile", res.data);
-        dispatch("getUserVaults")
+        dispatch("getUserVaults")       
       } catch (error) {
         console.error(error);
       }
     },
+    async getProfileInfo({ commit, dispatch, state }) {
+   let creatorCount = {}
+    creatorCount.keepCount = state.creatorKeeps.length;
+   creatorCount.vaultCount = state.creatorVaults.length;
+  commit("setCreatorCounts", creatorCount)
+    },
+
      async getAllKeeps({ commit }) {
       try {
         console.log("get all keeps?");       
@@ -141,6 +153,18 @@ export default new Vuex.Store({
       console.log("getcreator", creatorId)
       dispatch("getProfileVaults", creatorId)
       dispatch("getProfileKeeps", creatorId)
+      dispatch("getCreatorInfo", creatorId)
+    },
+
+    async getCreatorInfo({ commit }, creatorId) {
+      try {
+        let res = await api.get("profiles/" + creatorId)
+        console.log("creator?", res.data)
+        commit("setCreatorInfo", res.data)
+      } catch (error) {
+        console.error("Failed to get creator")
+        
+      }
     },
 
       async getActiveKeep({ commit }, keepId) {

@@ -2,6 +2,7 @@
   <div>
      <button v-if="!keepForm" type="button" class="btn btn-secondary" @click="keepFormToggle">Add Keep</button>
      <button v-if="!vaultForm" type="button" class="btn btn-warning" @click="vaultFormToggle">Add Vault</button>
+     <profile-roof-component/>
      <keeps-form-component v-if="keepForm"/>
      <vaults-form-component v-if="vaultForm"/>
      <profile-vaults-component v-for="iVault in creatorVaults" :key="iVault.id" :vaultProp="iVault"/>
@@ -10,6 +11,7 @@
 </template>
 
 <script>
+import profileRoofComponent from "../components/ProfileRoofComponent"
   import profileKeepsComponent from "../components/ProfileKeepsComponent";
   import profileVaultsComponent from "../components/ProfileVaultsComponent";
   import keepsFormComponent from "../components/KeepsFormComponent";
@@ -17,6 +19,7 @@
 export default {
   name: "profile-page",
   components: {
+    profileRoofComponent,
     profileKeepsComponent,
     profileVaultsComponent,
     keepsFormComponent,

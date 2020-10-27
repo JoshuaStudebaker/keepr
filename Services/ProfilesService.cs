@@ -1,3 +1,4 @@
+using System;
 using Keepr.Models;
 using Keepr.Repositories;
 
@@ -18,6 +19,14 @@ namespace Keepr.Services
         return _repo.Create(userInfo);
       }
       return profile;
+    }
+    internal Profile GetById(string id)
+    {
+      Profile activeProfile = _repo.GetById(id);
+      if (activeProfile == null)
+      { throw new Exception("Invalid Id / No Longer exists"); }
+
+      return activeProfile;
     }
   }
 }
