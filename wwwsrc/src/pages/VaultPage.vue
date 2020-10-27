@@ -16,6 +16,7 @@ export default {
    
   },
   mounted() {
+    this.$store.dispatch("getProfile");
     this.$store.dispatch("getVaultKeeps", this.$route.params.vaultId);
   },
   computed: {

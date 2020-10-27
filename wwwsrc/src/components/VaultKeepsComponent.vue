@@ -23,9 +23,14 @@ export default {
   props: ["keepProp"],
   components: {},
   
-  mounted() {},
+  mounted() {
+    this.$store.dispatch("getProfile");
+    this.$store.dispatch("getVaultKeeps", this.$route.params.vaultId);
+  },
 
-  computed: {},
+  computed: {
+    
+  },
   methods: {   
     setActiveKeep() {           
       this.$store.dispatch("getActiveKeep", this.keepProp.id); 
