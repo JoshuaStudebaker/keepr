@@ -28,4 +28,8 @@ export default {
 @import "./assets/_variables.scss";
 @import "bootstrap";
 @import "./assets/_overrides.scss";
+body{
+  background-color: hsla(195, 53%, 59%, 1);
+  
+}
 </style>

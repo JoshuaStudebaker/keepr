@@ -2,7 +2,7 @@
   <div class="home container-fluid">
     <!-- <h1 >Welcome</h1> -->
     <div class="row d-flex" v-if="!modalToggle">
-      <div class="card-columns p-3 justify-content-center">
+      <div class="card-columns p-md-4 p-3 justify-content-center">
       <all-keeps-component v-for="iKeep in keeps" :key="iKeep.id" :keepProp="iKeep"/></div>
     </div>
     <div class="row">

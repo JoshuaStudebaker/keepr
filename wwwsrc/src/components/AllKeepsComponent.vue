@@ -3,9 +3,9 @@
        <div class="card rounded-card shadow" @click="setActiveKeep" style="display: inline-block">      
       <div class="card-body container-img p-0 justify-content-between">
         <img :src="keepProp.img" class="img-fluid rounded-card"> 
-       <div class="bottom-left active-keep-buttom col-6 p-0 text-left">{{keepProp.name}}</div>
+       <div class="bottom-left col-6 p-0 text-left rounded">{{keepProp.name}}</div>
         <!-- <router-link :to="{name: 'Profile', params: {profileId: keepProp.creatorId}}"> -->
-          <i class="far fa-user profile shadow bottom-right col-6 p-0 text-right" @click.stop="routerPush"></i> 
+          <i class="far fa-user-circle profile shadow bottom-right col-6 p-0 text-right" @click.stop="routerPush"></i> 
           <!-- </router-link> -->
       </div>      
     </div> 
@@ -93,10 +93,31 @@ export default {
 
 .rounded-card{
   border-radius: 1rem;
+  cursor: pointer;
 }
 
-display-inline-blocks-cards{
-  display: inline-block;
+.fa-user-circle{
+  font-size: 1.2rem;
+  color: hsl(148.28, 93.55%, 71.76%);
+  background-color: hsla(218, 19%, 98%, 0.4);
+  border-radius: 50%
 }
+.fa-user-circle:hover{
+font-size: 1.4rem;
+background-color: hsla(148.28, 93.55%, 71.76%, 0.4);
+  color: hsla(218, 19%, 98%);
+}
+
+.see-through {
+  background-color: hsla(218, 19%, 89%, 0.8);
+}
+.sea-green {
+  color: hsl(148.28, 93.55%, 71.76%);
+}
+
+.see-through-white {
+  background-color: hsla(218, 19%, 98%, 0.8);
+}
+
 
 </style>
