@@ -1,20 +1,16 @@
 <template>
-  <div class="col-4">
-    <div class="card see-through rounded">
-      <div class="card-header see-through-white">
-        <h5 class="card-title active-keep-button" @click="setActiveKeep()">{{ keepProp.name }}</h5>
-      <h1 class="mt-2"></h1>
-        <h6 class="card-subtitle text-muted"><router-link :to="{name: 'Profile', params: {profileId: keepProp.creatorId}}"><i class="far fa-user profile"></i></router-link> {{ keepProp.creator.name }}</h6>
-      </div>
-      <div class="card-body">
-        <img :src="keepProp.img" class="img-fluid" alt="Responsive image">
-      </div>
-      <div class="card-footer see-through-white py-1">
-        <p class="card-text">{{ keepProp.description }}</p>     
-        <button type="button" class="btn btn-warning" @click="removeKeepFromVault">Remove from Vault</button>
-      </div>
-    </div>
-  </div>
+  
+     <div class="card rounded-card shadow" @click="setActiveKeep" style="display: inline-block">      
+      <div class="card-body container-img p-0 justify-content-between">
+        <img :src="keepProp.img" class="img-fluid rounded-card"> 
+        <i class="fas fa-times top-right cursor" @click="removeKeepFromVault"></i><div class="bottom-left col-6 p-0 text-left rounded">{{keepProp.name}}</div>
+       
+          <i class="far fa-user-circle profile shadow bottom-right col-6 p-0 text-right" @click.stop="routerPush"></i> 
+          
+      </div>      
+    </div> 
+   
+ 
 </template>
 
 <script>
@@ -71,6 +67,12 @@ this.$store.dispatch("removeFromVault", this.keepProp.vaultKeepId)
   .profile{
     cursor: pointer;
   }
+
+  .top-right {
+  position: absolute;
+  top: 8px;
+  right: 16px;
+}
 
   .profile:hover {
     box-shadow: 0px 0px 2px grey;

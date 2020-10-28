@@ -2,6 +2,9 @@ import Vue from "vue";
 import Vuex from "vuex";
 import { api } from "../services/AxiosService.js";
 import SweetAlert from "../services/SweetAlert.js";
+import router from "../router/index.js";
+
+
 
 Vue.use(Vuex);
 
@@ -18,7 +21,8 @@ export default new Vuex.Store({
     vaultForm: false,
     userVaults: [],
     creatorCount: {},
-    creatorInfo: {}
+    creatorInfo: {},
+    activeVault: {}
   },
   mutations: {
     setProfile(state, profile) {
@@ -33,6 +37,10 @@ export default new Vuex.Store({
     setActiveKeep(state, activeKeep) {
       state.activeKeep = activeKeep
       state.modalToggle = true
+    },
+     setActiveVault(state, activeVault) {
+      state.activeVault = activeVault
+      
     },
     returnAllKeeps(state) {
       state.modalToggle = false
@@ -186,6 +194,19 @@ export default new Vuex.Store({
         console.error("cannot get keep - sorry");
       }
     },
+
+      async getActiveVault({ commit, dispatch}, vaultId) {
+      try {
+        console.log("get active vault?");       
+        let res = await api.get("vaults/" + vaultId);
+        console.log("active vault", res);
+        commit("setActiveVault", res.data);
+        dispatch("addViews", vaultId)
+        dispatch("getCreatorInfo", res.data.creatorId)
+      } catch (error) {
+        console.error("cannot get vault - sorry");
+      }
+    },
       
        async addViews({ commit, state }, keepId) {
       try {
@@ -270,19 +291,21 @@ export default new Vuex.Store({
     async removeFromVault({ commit}, vaultKeepId) {
       if (
         await SweetAlert.sweetDelete()
-      )
-      console.log("DeleteKeepFromVault", vaultKeepId)
-      let res = await api.delete("vaultkeeps/" + vaultKeepId)
-      commit("removeFromVault", vaultKeepId)     
-     
+      ) {
+        console.log("DeleteKeepFromVault", vaultKeepId)
+        let res = await api.delete("vaultkeeps/" + vaultKeepId)
+        commit("removeFromVault", vaultKeepId)
+      }
     },
 
-        async deleteVault({ commit }, vaultId) {
+        async deleteVault({ commit }, vault) {
       if (
         await SweetAlert.sweetDelete()
       ) {
-        await api.delete("vaults/" + vaultId);
-        commit("deleteVault", vaultId);
+        await api.delete("vaults/" + vault.id);
+        commit("deleteVault", vault.id);
+router.push({name: 'Profile', params: {profileId: vault.creatorId}})
+       
       }
     },
         

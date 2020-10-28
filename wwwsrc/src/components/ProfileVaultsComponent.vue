@@ -1,16 +1,15 @@
 <template>
   
-     <div class="card see-through rounded-card" @click="setActiveVault">
-      <div class="card-header see-through-white">
-       <h5 class="card-title active-keep-button">{{ vaultProp.name }}</h5>
-      <h1 class="mt-2"></h1>
-        <h6 class="card-subtitle text-muted"><i class="far fa-user profile"></i> {{ vaultProp.creator.name }}</h6>
-      </div>
+     <div class="card see-through rounded-card" @click="setActiveVault">     
+       
       <div class="card-body">
-        <p class="card-text">{{ vaultProp.description }}</p> 
-         <p>   <i class="far fa-times-circle" @click.stop="deleteVault"></i></p>
-      </div>
+       <h5 class="card-title">{{ vaultProp.name }}</h5>
       
+       
+      
+        <p class="card-text">{{ vaultProp.description }}</p> 
+         <!-- <p>   <i class="far fa-times-circle" @click.stop="deleteVault"></i></p> -->
+      </div>
     </div>
 
 </template>

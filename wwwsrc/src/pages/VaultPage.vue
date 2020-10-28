@@ -1,8 +1,10 @@
 <template>
-  <div>
-    <h1 class="active-keep-button" @click="returnAllKeeps">Welcome</h1>
+  <div class="container-fluid">
+    <div class="row align-items-center d-flex px-2"><h1>{{activeVault.name}}</h1> <span class="pl-3"><i class="fas fa-trash" v-if="profile.id == activeVault.creatorId" @click="deleteVault(activeVault.id)"></i></span> </div>
+    <div class="row px-2">Keeps: {{vaultKeeps.length}}</div>
     <div class="row">
-      <vault-keeps-component v-for="iKeep in vaultKeeps" :key="iKeep.id" :keepProp="iKeep"/>
+      <div class="card-columns p-md-4 p-3 justify-content-center">
+      <vault-keeps-component v-for="iKeep in vaultKeeps" :key="iKeep.id" :keepProp="iKeep"/></div>
     </div>    
   </div>
 </template>
@@ -18,6 +20,7 @@ export default {
   mounted() {
     this.$store.dispatch("getProfile");
     this.$store.dispatch("getVaultKeeps", this.$route.params.vaultId);
+    this.$store.dispatch("getActiveVault", this.$route.params.vaultId);
   },
   computed: {
     vaultKeeps() {
@@ -26,8 +29,15 @@ export default {
     activeKeep() {
       return this.$store.state.activeKeep;
     },
+
+    activeVault() {
+      return this.$store.state.activeVault;
+    },
     modalToggle(){
       return this.$store.state.modalToggle
+    },
+    profile(){
+      return this.$store.state.profile
     }
     
   },methods: {
@@ -35,7 +45,9 @@ export default {
     returnAllKeeps() {           
       this.$store.commit("returnAllKeeps");      
     },
-  
+  deleteVault(id){
+      this.$store.dispatch("deleteVault", this.activeVault)     
+    },
   },
 };
 </script>
