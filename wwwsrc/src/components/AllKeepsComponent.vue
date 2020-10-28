@@ -1,11 +1,15 @@
 <template>  
-    <div class="card rounded-card shadow">      
+    <!--  -->
+       <div class="card rounded-card shadow" @click="setActiveKeep">      
       <div class="card-body container-img p-0">
         <img :src="keepProp.img" class="img-fluid rounded-card"> 
-        <div class="bottom-left active-keep-buttom" @click="setActiveKeep()">{{keepProp.name}}</div>
-        <router-link :to="{name: 'Profile', params: {profileId: keepProp.creatorId}}"><i class="far fa-user profile shadow bottom-right"></i></router-link> 
+       <div class="bottom-left active-keep-buttom">{{keepProp.name}}</div>
+        <!-- <router-link :to="{name: 'Profile', params: {profileId: keepProp.creatorId}}"> -->
+          <i class="far fa-user profile shadow bottom-right" @click.stop="routerPush"></i> 
+          <!-- </router-link> -->
       </div>      
     </div> 
+    <!--  -->
 </template>
 
 <script>
@@ -23,6 +27,11 @@ export default {
       this.$store.dispatch("getActiveKeep", this.keepProp.id);  
       this.$store.dispatch("getUserVaults")    
     },
+
+    routerPush(){
+      console.log("routerPush")
+      this.$router.push({name: 'Profile', params: {profileId: this.keepProp.creatorId}})
+    }
 
     
     // creatorLink(){
