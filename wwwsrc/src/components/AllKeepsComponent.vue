@@ -1,16 +1,10 @@
 <template>  
-    <div class="card see-through rounded">
-      <div class="card-header see-through-white">
-        <h5 class="card-title active-keep-button" @click="setActiveKeep()">{{ keepProp.name }}</h5>
-      <h1 class="mt-2"></h1>
-        <h6 class="card-subtitle text-muted"><router-link :to="{name: 'Profile', params: {profileId: keepProp.creatorId}}"><i class="far fa-user profile"></i></router-link> {{ keepProp.creator.name }}</h6>
-      </div>
-      <div class="card-body">
-        <img :src="keepProp.img" class="img-fluid" alt="Responsive image">
-      </div>
-      <div class="card-footer see-through-white py-1">
-        <p class="card-text">{{ keepProp.description }}</p>        
-      </div>
+    <div class="card rounded-card shadow">      
+      <div class="card-body container-img p-0">
+        <img :src="keepProp.img" class="img-fluid rounded-card"> 
+        <div class="bottom-left active-keep-buttom" @click="setActiveKeep()">{{keepProp.name}}</div>
+        <router-link :to="{name: 'Profile', params: {profileId: keepProp.creatorId}}"><i class="far fa-user profile shadow bottom-right"></i></router-link> 
+      </div>      
     </div> 
 </template>
 
@@ -73,5 +67,23 @@ export default {
     box-shadow: 0px 0px 2px grey;
   }
 
+  .bottom-right {
+  position: absolute;
+  bottom: 8px;
+  right: 16px;
+}
+.container-img {
+  position: relative;
+  text-align: center;
+  color: white;
+}.bottom-left {
+  position: absolute;
+  bottom: 8px;
+  left: 16px;
+}
+
+.rounded-card{
+  border-radius: 1rem;
+}
 
 </style>
