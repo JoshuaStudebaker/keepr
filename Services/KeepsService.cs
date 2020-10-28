@@ -49,6 +49,25 @@ namespace Keepr.Services
       return _repo.GetById(updatedKeep.Id);
     }
 
+    internal Keep Edit(Keep keep, string userId)
+    {
+      Keep oldKeep = _repo.GetById(keep.Id);
+      if (oldKeep == null) { throw new Exception("Invalid Id / No longer exists"); }
+      if (oldKeep.CreatorId != userId)
+      {
+        throw new Exception("Access Denied");
+      }
+      keep.Name = keep.Name == null ? oldKeep.Name : keep.Name;
+      keep.Description = keep.Description == null ? oldKeep.Description : keep.Description;
+      keep.Img = keep.Img == null ? oldKeep.Img : keep.Img;
+      keep.Views = keep.Views == 0 ? oldKeep.Views : keep.Views;
+      keep.Shares = keep.Shares == 0 ? oldKeep.Shares : keep.Shares;
+      keep.Keeps = keep.Keeps == 0 ? oldKeep.Keeps : keep.Keeps; 
+      keep.CreatorId = oldKeep.CreatorId;
+      keep.Creator = oldKeep.Creator;
+      Keep updatedKeep = _repo.Update(keep);
+      return _repo.GetById(updatedKeep.Id);
+    }
     // internal Keep Edit(Keep keep)
     // {
     //   Keep keepCheck = _repo.GetById(keep.Id);
