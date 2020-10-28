@@ -5,7 +5,7 @@
      <img :src="creatorInfo.picture" class="rounded-card"/>
 
      
-     <div class="col-8 text-left">
+     <div class="col-8 p-2 text-left">
        
    <h3 class="smaller-mobile">{{creatorInfo.name}}</h3>
        <h5 class="smaller-mobile-sub"> Vaults: {{creatorVaults.length}}</h5>
@@ -61,13 +61,13 @@ export default {
 <style>
 @media (max-width: 700px) {
 .smaller-mobile{
-  font-size: 1.1rem;
+  font-size: 1rem;
 }
 }
 
 @media (max-width: 700px) {
 .smaller-mobile-sub{
-  font-size: 1rem;
+  font-size: .9rem;
 }
 }
 </style>

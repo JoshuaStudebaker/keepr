@@ -7,14 +7,15 @@
     </div>
     <div class="row">
       <transition name="slide-fade">
-      <div v-if="modalToggle" class="modal-overlay d-flex">
-       <div class="col-6 p-2"><img :src="activeKeep.img" class="img-fluid" alt="Responsive image"> </div> 
-       <div class="col-6"><div class="row justify-content-end px-2"><i class="far fa-times-circle x-out" @click="returnKeeps"></i></div><div class="row justify-content-center">
+      <div v-if="modalToggle" class="modal-overlay d-flex rounded-card-no-pointer">
+       <div class="col-6 p-2 rounded-card-no-pointer d-flex align-items-center"><img :src="activeKeep.img" class="img-fluid rounded-card-no-pointer img-better" alt="Responsive image"> </div> 
+       <div class="col-6 greyish-font"><div class="row justify-content-end px-2"><i class="far fa-times-circle x-out " @click="returnKeeps"></i></div><div class="row d-flex justify-content-center">
        <div class="m-2"> <i class="far fa-eye"></i> <span class="p-1">{{activeKeep.views}} </span></div><div class="m-2"><i class="fab fa-fort-awesome"></i><span class="p-1">{{activeKeep.keeps}}</span></div>
        </div>
-       <div class="row justify-content-center"><h1>{{activeKeep.name}}</h1></div>
-       <div class="row justify-content-center"><p>{{activeKeep.description}}</p></div>
-       <div class="row">
+       <div class="row d-flex justify-content-center"><h1>{{activeKeep.name}}</h1></div>
+       <div class="row d-flex justify-content-center desc-class"><p>{{activeKeep.description}}</p></div>
+       <div class="row hr"></div>
+       <div class="row d-flex justify-content-around">
          <form @submit.prevent="addToVault">
          <select class="custom-select" v-model="vaultKeep.vaultId">
   <option selected>Add to Vault</option>
@@ -23,7 +24,7 @@
 </select>
   <button type="submit" class="btn btn-primary">Submit</button>
          </form>
- 
+ <i class="fas fa-trash " v-if="profile.id == activeKeep.creatorId"></i> <div @click.stop="routerPush"> <img :src="profile.picture" class="small-pic">{{profile.name}}</div>
 </div>
        </div>
       </div>
@@ -64,6 +65,10 @@ export default {
 
     userVaults(){
      return this.$store.state.userVaults
+    },
+
+    profile(){
+      return this.$store.state.profile
     }
    
     
@@ -92,7 +97,13 @@ export default {
   z-index: 98;
   background-color: silver;
 }
+@media screen and (min-width: 825px) {
+.img-better{
+  max-height: 75vh
+}
 
+
+}
 .slide-fade-enter-active {
   transition: all 0.75s ease;
 }
@@ -117,11 +128,16 @@ export default {
 
 .x-out{
   cursor: pointer;
+  color: hsla(218, 19%, 39%, 1);
+  /* background-color: hsla(195, 53%, 79%, 0.5); */
+  /* border-radius: 50%; */
+  font-size: 1.2rem
+
 }
   .x-out:hover{
     color: maroon;
     cursor: pointer;
-    font-size: 1.1rem;
+    font-size: 1.4rem;
   }
 @media screen and (max-width: 700px) {
   .card-columns {  
@@ -133,8 +149,32 @@ export default {
     column-count: 4;
   }
 }
-
+.greyish-font{
+  color: hsla(218, 39%, 29%, 1);
+}
+  .fa-trash{
+  font-size: 1.2rem;
+  color: hsla(218, 19%, 39%, 1);
+  cursor: pointer;
   
+}
+.fa-trash:hover{
+font-size: 1.4rem;
+color: maroon;
+cursor: pointer;
+}
+.hr {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  margin-right: 2rem;
+  margin-left: 2rem
+}
 
+.small-pic{
+  width: 1.4rem;
+  height: 1.4rem
+}
 
 </style>

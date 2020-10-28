@@ -96,6 +96,11 @@ export default {
   cursor: pointer;
 }
 
+.rounded-card-no-pointer{
+  border-radius: 1rem;
+ 
+}
+
 .fa-user-circle{
   font-size: 1.2rem;
   color: hsl(148.28, 93.55%, 71.76%);
