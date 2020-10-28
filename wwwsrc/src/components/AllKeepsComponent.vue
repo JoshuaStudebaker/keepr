@@ -1,11 +1,11 @@
 <template>  
     <!--  -->
-       <div class="card rounded-card shadow" @click="setActiveKeep">      
-      <div class="card-body container-img p-0">
+       <div class="card rounded-card shadow" @click="setActiveKeep" style="display: inline-block">      
+      <div class="card-body container-img p-0 justify-content-between">
         <img :src="keepProp.img" class="img-fluid rounded-card"> 
-       <div class="bottom-left active-keep-buttom">{{keepProp.name}}</div>
+       <div class="bottom-left active-keep-buttom col-6 p-0 text-left">{{keepProp.name}}</div>
         <!-- <router-link :to="{name: 'Profile', params: {profileId: keepProp.creatorId}}"> -->
-          <i class="far fa-user profile shadow bottom-right" @click.stop="routerPush"></i> 
+          <i class="far fa-user profile shadow bottom-right col-6 p-0 text-right" @click.stop="routerPush"></i> 
           <!-- </router-link> -->
       </div>      
     </div> 
@@ -93,6 +93,10 @@ export default {
 
 .rounded-card{
   border-radius: 1rem;
+}
+
+display-inline-blocks-cards{
+  display: inline-block;
 }
 
 </style>
