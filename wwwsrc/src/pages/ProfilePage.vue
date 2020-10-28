@@ -5,7 +5,8 @@
      <profile-roof-component/>
      <keeps-form-component v-if="keepForm"/>
      <vaults-form-component v-if="vaultForm"/>
-     <profile-vaults-component v-for="iVault in creatorVaults" :key="iVault.id" :vaultProp="iVault"/>
+     <div class="card-columns p-md-4 p-3 justify-content-center">
+     <profile-vaults-component v-for="iVault in creatorVaults" :key="iVault.id" :vaultProp="iVault"/></div>
      <profile-keeps-component v-for="iKeep in creatorKeeps" :key="iKeep.id" :keepProp="iKeep"/>
      <p>{{creatorKeeps.length}}</p>
   </div>

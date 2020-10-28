@@ -1,18 +1,18 @@
 <template>
-  <div class="col-4">
-    <div class="card see-through rounded">
+  
+     <div class="card see-through rounded-card" @click="setActiveVault">
       <div class="card-header see-through-white">
-        <router-link :to="{name: 'Vault', params: {vaultId: vaultProp.id}}"><h5 class="card-title active-keep-button" @click="setActiveVault()">{{ vaultProp.name }}</h5></router-link>
+       <h5 class="card-title active-keep-button">{{ vaultProp.name }}</h5>
       <h1 class="mt-2"></h1>
         <h6 class="card-subtitle text-muted"><i class="far fa-user profile"></i> {{ vaultProp.creator.name }}</h6>
       </div>
       <div class="card-body">
         <p class="card-text">{{ vaultProp.description }}</p> 
-         <p>   <i class="far fa-times-circle" @click="deleteVault"></i></p>
+         <p>   <i class="far fa-times-circle" @click.stop="deleteVault"></i></p>
       </div>
       
     </div>
-  </div>
+
 </template>
 
 <script>
@@ -28,15 +28,13 @@ export default {
    
     setActiveVault() {           
       this.$store.dispatch("getActiveVault", this.vaultProp.id);      
+      this.$router.push({name: 'Vault', params: {vaultId: this.vaultProp.id}})
     },
 
     deleteVault(){
       this.$store.dispatch("deleteVault", this.vaultProp.id)
-    }
-    // creatorLink(){
-    //   console.log("creatorId", this.vaultProp.creatorId)
-    //  this.$store.dispatch
-    // },
+    },
+    
   
   },
 };
