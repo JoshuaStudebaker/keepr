@@ -1,20 +1,20 @@
 <template>
  <div class="row p-3 d-flex justify-content-left">
-   <div class="see-through p-2 rounded mx-2 col-8 d-flex align-items-center">
-   <div class="col-3 text-center">
-     <img :src="creatorInfo.picture" class="img-fluid"/></div>
+   <div class="see-through p-2 rounded-card mx-2 d-flex align-items-center">
+   
+     <img :src="creatorInfo.picture" class="rounded-card"/>
 
      
-     <div class="col-8">
+     <div class="col-8 text-left">
        
-   <h3>{{creatorInfo.name}}</h3>
-       <h5> Vaults: {{creatorVaults.length}}</h5>
-       <h5>Keeps: {{creatorKeeps.length}}</h5>
+   <h3 class="smaller-mobile">{{creatorInfo.name}}</h3>
+       <h5 class="smaller-mobile-sub"> Vaults: {{creatorVaults.length}}</h5>
+       <h5 class="smaller-mobile-sub" >Keeps: {{creatorKeeps.length}}</h5>
    
      </div>
    </div>
   </div>
- </div>
+ 
 </template>
 
 <script>
@@ -59,6 +59,15 @@ export default {
 </script>
 
 <style>
+@media (max-width: 700px) {
+.smaller-mobile{
+  font-size: 1.1rem;
+}
+}
 
-
+@media (max-width: 700px) {
+.smaller-mobile-sub{
+  font-size: 1rem;
+}
+}
 </style>
