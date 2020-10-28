@@ -15,8 +15,8 @@
        <div class="row d-flex justify-content-center"><h1>{{activeKeep.name}}</h1></div>
        <div class="row d-flex justify-content-center desc-class"><p>{{activeKeep.description}}</p></div>
        <div class="row hr"></div>
-       <div class="row d-flex justify-content-around">
-         <form @submit.prevent="addToVault">
+       <div class="row d-flex justify-content-center">
+         <form @submit.prevent="addToVault" class="col-4">
          <select class="custom-select" v-model="vaultKeep.vaultId">
   <option selected>Add to Vault</option>
   <option v-for="uv in userVaults" :key="uv.id" :value="uv.id"><span class="private-vault" v-if="uv.isPrivate">
@@ -25,7 +25,7 @@
 </select>
   <button type="submit" class="btn btn-primary">Submit</button>
          </form>
- <i class="fas fa-trash" v-if="profile.id == activeKeep.creatorId" @click="deleteKeep"></i> <div @click.stop="routerPush"> <img :src="profile.picture" class="small-pic">{{profile.name}}</div>
+ <i class="fas fa-trash col-4" v-if="profile.id == activeKeep.creatorId" @click="deleteKeep"></i> <div @click.stop="routerPush" class="col-4"> <img :src="creator.picture" class="small-pic">{{creator.name}}</div>
 </div>
        </div>
       </div>
@@ -68,6 +68,10 @@ export default {
      return this.$store.state.userVaults
     },
 
+    creator(){
+      return this.$store.state.creatorInfo
+    },
+
     profile(){
       return this.$store.state.profile
     }
@@ -88,6 +92,10 @@ export default {
     deleteKeep(){
       this.$store.dispatch("deleteKeepFromActive", this.activeKeep.id)
       
+    },
+    routerPush(){
+      console.log("routerPush")
+      this.$router.push({name: 'Profile', params: {profileId: this.activeKeep.creatorId}})
     }
   }
 };

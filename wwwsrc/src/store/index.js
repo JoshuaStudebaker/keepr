@@ -141,14 +141,14 @@ export default new Vuex.Store({
     },
    
    
-   async getUserVaults({ state, commit}) {
+   async getUserVaults({ state, commit, dispatch}) {
        
      try {
        
         let userId = state.profile.id
         console.log("user vaults??", userId);       
         let res = await api.get("profiles/" + userId +"/vaults");
-        console.log("user vaults?", res);
+       console.log("user vaults?", res);
        commit("setUserVaults", res.data);       
       } catch (error) {
         console.error("cannot get user vaults - sorry");
@@ -174,13 +174,14 @@ export default new Vuex.Store({
       }
     },
 
-      async getActiveKeep({ commit }, keepId) {
+      async getActiveKeep({ commit, dispatch}, keepId) {
       try {
         console.log("get active keep?");       
         let res = await api.get("keeps/" + keepId);
         console.log("active keep", res);
         commit("setActiveKeep", res.data);
-        this.dispatch("addViews", keepId)
+        dispatch("addViews", keepId)
+        dispatch("getCreatorInfo", res.data.creatorId)
       } catch (error) {
         console.error("cannot get keep - sorry");
       }
