@@ -1,16 +1,19 @@
 <template>
- <div class="row">
-   <div class="card text-left">
-     <img class="card-img-top" src="holder.js/100px180/" alt="">
-     <div class="card-body">
-       <h4 class="card-title">Title</h4>
-       <p class="card-text">Body</p> 
-       <p>{{creatorKeeps.length}} , {{creatorVaults.length}}</p>
-   <p>{{creatorInfo.name}}</p>
-   <img :src="creatorInfo.picture"/>
+ <div class="row p-3 d-flex justify-content-left">
+   <div class="see-through p-2 rounded mx-2 col-8 d-flex align-items-center">
+   <div class="col-3 text-center">
+     <img :src="creatorInfo.picture" class="img-fluid"/></div>
+
+     
+     <div class="col-8">
+       
+   <h3>{{creatorInfo.name}}</h3>
+       <h5> Vaults: {{creatorVaults.length}}</h5>
+       <h5>Keeps: {{creatorKeeps.length}}</h5>
+   
      </div>
    </div>
-  
+  </div>
  </div>
 </template>
 

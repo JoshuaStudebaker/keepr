@@ -1,5 +1,6 @@
 <template>
-  <option :value="selectionProp.id">{{selectionProp.name}}</option>
+  <option :value="selectionProp.id" ><span v-if="selectionProp.isPrivate" class="private-color"> {{selectionProp.name}} - Private</span><span v-if="!selectionProp.isPrivate" > {{selectionProp.name}}</span></option>
+  
 </template>
 
 <script>
@@ -18,7 +19,9 @@ export default {
 </script>
 
 <style>
-
+.private-color{
+  background-color: rosybrown;
+}
 
 
 </style>
