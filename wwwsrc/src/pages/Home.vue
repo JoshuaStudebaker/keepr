@@ -19,12 +19,13 @@
          <form @submit.prevent="addToVault">
          <select class="custom-select" v-model="vaultKeep.vaultId">
   <option selected>Add to Vault</option>
-  <option v-for="uv in userVaults" :key="uv.id" :value="uv.id">
-    {{uv.name}}</option>
+  <option v-for="uv in userVaults" :key="uv.id" :value="uv.id"><span class="private-vault" v-if="uv.isPrivate">
+    {{uv.name}} - Private</span><span v-if="!uv.isPrivate">
+    {{uv.name}}</span></option>
 </select>
   <button type="submit" class="btn btn-primary">Submit</button>
          </form>
- <i class="fas fa-trash " v-if="profile.id == activeKeep.creatorId"></i> <div @click.stop="routerPush"> <img :src="profile.picture" class="small-pic">{{profile.name}}</div>
+ <i class="fas fa-trash" v-if="profile.id == activeKeep.creatorId" @click="deleteKeep"></i> <div @click.stop="routerPush"> <img :src="profile.picture" class="small-pic">{{profile.name}}</div>
 </div>
        </div>
       </div>
@@ -83,6 +84,10 @@ export default {
       this.vaultKeep.keepId = this.activeKeep.id
       console.log("vaultkeep", this.vaultKeep)
       this.$store.dispatch("addKeepToVault", this.vaultKeep)
+    },
+    deleteKeep(){
+      this.$store.dispatch("deleteKeepFromActive", this.activeKeep.id)
+      
     }
   }
 };
@@ -176,5 +181,7 @@ cursor: pointer;
   width: 1.4rem;
   height: 1.4rem
 }
+
+
 
 </style>

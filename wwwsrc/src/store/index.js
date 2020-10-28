@@ -232,6 +232,19 @@ export default new Vuex.Store({
         commit("deleteKeep", keepId);
       }
     },
+
+       async deleteKeepFromActive({ commit, dispatch }, keepId) {
+      if (
+        await SweetAlert.sweetDelete(
+         
+        )
+      ) {
+        await api.delete("keeps/" + keepId);
+        commit("deleteKeep", keepId);
+        dispatch("getAllKeeps")
+        commit("returnAllKeeps")
+      }
+    },  
     async createVault({ commit, state }, newVault) {
       if (newVault.isPrivate == "false") {
         newVault.isPrivate = false

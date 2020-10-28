@@ -30,6 +30,6 @@ export default {
 @import "./assets/_overrides.scss";
 body{
   background-color: hsla(195, 53%, 59%, 1);
-  
+   font-family: "Balthazar", serif;
 }
 </style>

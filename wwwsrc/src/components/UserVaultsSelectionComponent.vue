@@ -1,5 +1,5 @@
 <template>
-  <option :value="selectionProp.id" ><span v-if="selectionProp.isPrivate" class="private-color"> {{selectionProp.name}} - Private</span><span v-if="!selectionProp.isPrivate" > {{selectionProp.name}}</span></option>
+  <option :value="selectionProp.id" ><span v-if="selectionProp.isPrivate == true" class="private-color"> {{selectionProp.name}} - Private</span><span v-if="selectionProp.isPrivate == false" > {{selectionProp.name}}</span></option>
   
 </template>
 
