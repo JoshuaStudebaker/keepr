@@ -64,6 +64,20 @@ namespace Keepr.Controllers
         return BadRequest(error.Message);
       }
     }
+    // [HttpPut("{id}")]
+    // public ActionResult<Keep> Put(int id, [FromBody] Keep keepBody)
+    // {
+    //   try
+    //   {
+    //     keepBody.Id = id;
+    //     Keep updatedKeep = _service.Edit(keepBody);
+    //     return Ok(updatedKeep);
+    //   }
+    //   catch (System.Exception error)
+    //   {
+    //     return BadRequest(error.Message);
+    //   }
+    // }
 
     [HttpPatch("{id}")]
     public ActionResult<Keep> Patch(int id, [FromBody] KeepPatch keepPatchBody)
@@ -71,7 +85,7 @@ namespace Keepr.Controllers
       try
       {
         keepPatchBody.Id = id;
-        Keep updatedKeep = _service.Patch(keepPatchBody);        
+        Keep updatedKeep = _service.Patch(keepPatchBody);
         return Ok(updatedKeep);
       }
       catch (System.Exception error)

@@ -49,6 +49,22 @@ namespace Keepr.Services
       return _repo.GetById(updatedKeep.Id);
     }
 
+    // internal Keep Edit(Keep keep)
+    // {
+    //   Keep keepCheck = _repo.GetById(keep.Id);
+    //   if (keepCheck == null) { throw new Exception("Invalid Id / No longer exists"); }
+    //   if (keepCheck.CreatorId == keep.CreatorId)
+    //   {
+    //     Keep updatedKeep = _repo.Update(keep);
+    //     return _repo.GetById(updatedKeep.Id);
+    //   }
+    //   else
+    //   {
+    //     throw new Exception("Invalid Id / Access Denied");
+    //   }
+    // }
+
+
 
     internal IEnumerable<Keep> GetByCreatorId(string creatorId)
     {
