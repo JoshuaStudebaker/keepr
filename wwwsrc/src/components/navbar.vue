@@ -103,8 +103,9 @@ background-color: hsla(148.28, 93.55%, 71.76%, 0.4);
 
 .sea-green-font{
   color:  hsl(148.28, 93.55%, 71.76%);
-  font-size: 1.6rem; box-shadow: 0px 0px 6px 1px hsl(148.28, 93.55%, 71.76%);
-  text-shadow: 1px 1px 1px hsla(195, 53%, 59%, 1);;
-  border-radius: 50%
+  font-size: 1.6rem; 
+  box-shadow: 0px 0px 6px 1px hsl(148.28, 93.55%, 71.76%);  
+  border-radius: 50%;
+   background-color: hsla(218, 19%, 98%, 0.4);
 }
 </style>
