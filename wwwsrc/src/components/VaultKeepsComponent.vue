@@ -40,13 +40,7 @@ this.$store.dispatch("removeFromVault", this.keepProp.vaultKeepId)
 </script>
 
 <style>
-.red-font {
-  color: red;
-}
 
-.green-font {
-  color: green;
-}
 
 .see-through {
   background-color: hsla(218, 19%, 89%, 0.8);

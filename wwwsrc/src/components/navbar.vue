@@ -17,8 +17,24 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarText">
-      <span class="navbar-text">
         <!-- Consider changing this to a profile picture -->
+        <ul class="navbar-nav mr-auto">
+        <li class="nav-item" :class="{ active: $route.name == 'Home' }">
+          <router-link :to="{ name: 'Home' }" class="nav-link text-light"
+            ><i class="fas fa-home sea-green-font p-2"></i></router-link
+          >
+        </li>
+        <li
+          class="nav-item"
+          v-if="$auth.isAuthenticated"
+          :class="{ active: $route.name == 'Profile' }"
+        >
+          <router-link class="nav-link text-light" :to="{ name: 'Profile',  params: {profileId: profile.id}}"
+            ><i class="far fa-user sea-green-font p-2"></i></router-link
+          >
+        </li>
+       </ul> 
+      <span class="navbar-text">
         <button
           class="btn btn-success"
           @click="login"
@@ -26,7 +42,7 @@
         >
           Login
         </button>
-        <button class="btn btn-danger" @click="logout" v-else>logout</button>
+        <button class="btn btn-danger" @click="logout" v-else>Logout</button>
       </span>
     </div>
   </nav>
@@ -50,6 +66,16 @@ export default {
       await this.$auth.logout({ returnTo: window.location.origin });
     },
   },
+   computed: {
+    
+
+    profile(){
+      return this.$store.state.profile
+    }
+   
+    
+  },
+
 };
 </script>
 
@@ -73,5 +99,12 @@ export default {
 font-size: 1.4rem;
 background-color: hsla(148.28, 93.55%, 71.76%, 0.4);
   color: hsla(218, 19%, 98%);
+}
+
+.sea-green-font{
+  color:  hsl(148.28, 93.55%, 71.76%);
+  font-size: 1.6rem; box-shadow: 0px 0px 6px 1px hsl(148.28, 93.55%, 71.76%);
+  text-shadow: 1px 1px 1px hsla(195, 53%, 59%, 1);;
+  border-radius: 50%
 }
 </style>
